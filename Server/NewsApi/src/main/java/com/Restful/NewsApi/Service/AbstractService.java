@@ -1,4 +1,4 @@
-package com.Restful.NewsApi.Service;
+package com.Restful.NewsAPI.Service;
 
 import org.springframework.web.client.RestTemplate;
 

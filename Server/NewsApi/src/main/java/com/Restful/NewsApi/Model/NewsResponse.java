@@ -1,6 +1,14 @@
-package com.Restful.NewsApi.Model;
+package com.Restful.NewsAPI.Model;
 
-// TODO: enable lombok and include decorators
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class NewsResponse {
     private Article[] articles;
 }

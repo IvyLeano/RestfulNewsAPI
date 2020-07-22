@@ -1,6 +1,14 @@
-package com.Restful.NewsApi.Model;
+package com.Restful.NewsAPI.Model;
 
-//TODO: add decorators
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Article {
     private Source source;
     private String author;

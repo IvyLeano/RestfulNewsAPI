@@ -1,4 +1,4 @@
-package com.Restful.NewsApi.Config;
+package com.Restful.NewsAPI.Config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -9,10 +9,10 @@ import org.springframework.web.client.RestTemplate;
 @Configuration
 public class AppConfig {
 
-    @Value("${api-key}")
+    @Value("${api.key}")
     private String apiKey;
 
-    @Value("$base.url")
+    @Value("${base.url}")
     private String newsBaseUrl;
 
     @Bean(name="apiKey")
@@ -29,4 +29,5 @@ public class AppConfig {
     public RestTemplate getRestTemplate() {
         return new RestTemplate(new HttpComponentsClientHttpRequestFactory());
     }
+
 }

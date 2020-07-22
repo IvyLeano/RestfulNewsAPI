@@ -1,6 +1,6 @@
-package com.Restful.NewsApi.Service;
+package com.Restful.NewsAPI.Service;
 
-import com.Restful.NewsApi.Model.NewsResponse;
+import com.Restful.NewsAPI.Model.NewsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpEntity;
@@ -25,12 +25,10 @@ public class NewsService extends AbstractService {
         if (apiKey.isEmpty() || apiKey == null || source.isEmpty() || source == null) {
             throw new IllegalArgumentException();
         }
-
         NewsResponse newsResponse = new NewsResponse();
-
         HttpHeaders headers = new HttpHeaders();
         HttpEntity request = new HttpEntity(headers);
-        Map<String, String> uriParameters = new HashMap<>();
+        Map<String, String> uriParameters = new HashMap();
         uriParameters.put("apiKey", apiKey);
         uriParameters.put("source", source);
         ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl, HttpMethod.GET, request, NewsResponse.class, uriParameters);
@@ -43,11 +41,10 @@ public class NewsService extends AbstractService {
         if (apiKey.isEmpty() || apiKey == null || countryCode.isEmpty() || countryCode == null) {
             throw new IllegalArgumentException();
         }
-
         NewsResponse newsResponse = new NewsResponse();
         HttpHeaders headers = new HttpHeaders();
         HttpEntity request = new HttpEntity(headers);
-        Map<String, String> uriParameters = new HashMap<>();
+        Map<String, String> uriParameters = new HashMap();
         uriParameters.put("apiKey", apiKey);
         uriParameters.put("countryCode", countryCode);
         ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl, HttpMethod.GET, request, NewsResponse.class, uriParameters);
@@ -60,11 +57,10 @@ public class NewsService extends AbstractService {
         if (apiKey.isEmpty() || apiKey == null || category.isEmpty() || category == null) {
             throw new IllegalArgumentException();
         }
-
         NewsResponse newsResponse = new NewsResponse();
         HttpHeaders headers = new HttpHeaders();
         HttpEntity request = new HttpEntity(headers);
-        Map<String, String> uriParameters = new HashMap<>();
+        Map<String, String> uriParameters = new HashMap();
         uriParameters.put("apiKey", apiKey);
         uriParameters.put("category", category);
         ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl, HttpMethod.GET, request, NewsResponse.class, uriParameters);

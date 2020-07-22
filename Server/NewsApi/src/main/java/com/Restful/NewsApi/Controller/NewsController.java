@@ -1,7 +1,7 @@
-package com.Restful.NewsApi.Controller;
+package com.Restful.NewsAPI.Controller;
 
-import com.Restful.NewsApi.Model.NewsResponse;
-import com.Restful.NewsApi.Service.NewsService;
+import com.Restful.NewsAPI.Model.NewsResponse;
+import com.Restful.NewsAPI.Service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,12 +18,11 @@ public class NewsController {
         this.newsService = newsService;
     }
 
-    @GetMapping("/top-headlines{apiKey}{source}") //TODO: update the uri param notation in getMapping ""
+    @GetMapping("/top-headlines")
     public ResponseEntity<NewsResponse> getNewsBySource(@PathVariable String apiKey, @PathVariable String source) {
         if (apiKey.isEmpty() || apiKey == null || source.isEmpty() || source == null) { //TODO: create a utility function for this
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         try {
             NewsResponse newsResponse = newsService.getNewsBySource(apiKey, source);
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
@@ -32,12 +31,11 @@ public class NewsController {
         }
     }
 
-    @GetMapping("/top-headlines{apiKey}{country}") //TODO: update the uri param notation in getMapping ""
+    @GetMapping("/top-headlines")
     public ResponseEntity<NewsResponse> getNewsByCountry(@PathVariable String apiKey, @PathVariable String country) {
         if (apiKey.isEmpty() || apiKey == null || country.isEmpty() || country == null) { //TODO: create a utility function for this
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         try {
             NewsResponse newsResponse = newsService.getNewsBySource(apiKey, country);
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
@@ -46,12 +44,11 @@ public class NewsController {
         }
     }
 
-    @GetMapping("/top-headlines{apiKey}{category}") //TODO: update the uri param notation in getMapping ""
+    @GetMapping("/top-headlines")
     public ResponseEntity<NewsResponse> getNewsByCategory(@PathVariable String apiKey, @PathVariable String category) {
         if (apiKey.isEmpty() || apiKey == null || category.isEmpty() || category == null) { //TODO: create a utility function for this
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-
         try {
             NewsResponse newsResponse = newsService.getNewsBySource(apiKey, category);
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
@@ -59,6 +56,5 @@ public class NewsController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
-
 
 }

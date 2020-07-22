@@ -1,14 +1,13 @@
-package com.Restful.NewsApi;
+package com.Restful.NewsAPI;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NewsApiApplicationTests {
+class NewsApiApplicationTests { 
 
-	// TODO: testing for service and controller
 	@Test
-	void contextLoads() {
+	void contextLoads() { // TODO: testing needed
 	}
 
 }
