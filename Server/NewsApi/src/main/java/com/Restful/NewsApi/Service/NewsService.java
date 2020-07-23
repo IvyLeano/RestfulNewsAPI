@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 import java.util.Map;
+import static com.Restful.NewsAPI.Constants.*;
 
 @Service
 public class NewsService extends AbstractService {
@@ -31,7 +32,7 @@ public class NewsService extends AbstractService {
         Map<String, String> uriParameters = new HashMap();
         uriParameters.put("apiKey", apiKey);
         uriParameters.put("source", source);
-        ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl, HttpMethod.GET, request, NewsResponse.class, uriParameters);
+        ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl + TOP_HEADLINES_ENDPOINTS, HttpMethod.GET, request, NewsResponse.class, uriParameters);
         newsResponse = response.getBody();
 
         return newsResponse;

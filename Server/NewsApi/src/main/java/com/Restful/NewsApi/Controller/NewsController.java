@@ -18,9 +18,9 @@ public class NewsController {
         this.newsService = newsService;
     }
 
-    @GetMapping("/top-headlines")
+    @GetMapping("/top-headlines/source")
     public ResponseEntity<NewsResponse> getNewsBySource(@PathVariable String apiKey, @PathVariable String source) {
-        if (apiKey.isEmpty() || apiKey == null || source.isEmpty() || source == null) { //TODO: create a utility function for this
+        if (apiKey.isEmpty() || apiKey == null || source.isEmpty() || source == null) { //TODO: create a utility function for this ?? or use StringUtils instead
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         try {
@@ -31,7 +31,7 @@ public class NewsController {
         }
     }
 
-    @GetMapping("/top-headlines")
+    @GetMapping("/top-headlines/country")
     public ResponseEntity<NewsResponse> getNewsByCountry(@PathVariable String apiKey, @PathVariable String country) {
         if (apiKey.isEmpty() || apiKey == null || country.isEmpty() || country == null) { //TODO: create a utility function for this
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
@@ -44,7 +44,7 @@ public class NewsController {
         }
     }
 
-    @GetMapping("/top-headlines")
+    @GetMapping("/top-headlines/category")
     public ResponseEntity<NewsResponse> getNewsByCategory(@PathVariable String apiKey, @PathVariable String category) {
         if (apiKey.isEmpty() || apiKey == null || category.isEmpty() || category == null) { //TODO: create a utility function for this
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
