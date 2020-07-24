@@ -5,6 +5,7 @@ import com.Restful.NewsAPI.Service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,9 +19,9 @@ public class NewsController {
         this.newsService = newsService;
     }
 
-    @GetMapping("/top-headlines/source")
-    public ResponseEntity<NewsResponse> getNewsBySource(@PathVariable String apiKey, @PathVariable String source) {
-        if (apiKey.isEmpty() || apiKey == null || source.isEmpty() || source == null) { //TODO: create a utility function for this ?? or use StringUtils instead
+    @GetMapping("/source{apiKey}{sources}")
+    public ResponseEntity<NewsResponse> getNewsBySource(@PathVariable("apiKey") String apiKey, @PathVariable("sources") String source) {
+        if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(source)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         try {
@@ -31,26 +32,26 @@ public class NewsController {
         }
     }
 
-    @GetMapping("/top-headlines/country")
-    public ResponseEntity<NewsResponse> getNewsByCountry(@PathVariable String apiKey, @PathVariable String country) {
-        if (apiKey.isEmpty() || apiKey == null || country.isEmpty() || country == null) { //TODO: create a utility function for this
+    @GetMapping("/country{apiKey}{country}")
+    public ResponseEntity<NewsResponse> getNewsByCountry(@PathVariable("apiKey") String apiKey, @PathVariable("country") String country) {
+        if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(country)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         try {
-            NewsResponse newsResponse = newsService.getNewsBySource(apiKey, country);
+            NewsResponse newsResponse = newsService.getNewsByCountry(apiKey, country);
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
-    @GetMapping("/top-headlines/category")
+    @GetMapping("/category{apiKey}{category}")
     public ResponseEntity<NewsResponse> getNewsByCategory(@PathVariable String apiKey, @PathVariable String category) {
-        if (apiKey.isEmpty() || apiKey == null || category.isEmpty() || category == null) { //TODO: create a utility function for this
+        if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(category)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         try {
-            NewsResponse newsResponse = newsService.getNewsBySource(apiKey, category);
+            NewsResponse newsResponse = newsService.getNewsByCategory(apiKey, category);
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

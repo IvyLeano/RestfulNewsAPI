@@ -8,6 +8,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
@@ -23,15 +24,15 @@ public class NewsService extends AbstractService {
     }
 
     public NewsResponse getNewsBySource(String apiKey, String source) {
-        if (apiKey.isEmpty() || apiKey == null || source.isEmpty() || source == null) {
+        if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(source)) {
             throw new IllegalArgumentException();
         }
-        NewsResponse newsResponse = new NewsResponse();
+        NewsResponse newsResponse;
         HttpHeaders headers = new HttpHeaders();
         HttpEntity request = new HttpEntity(headers);
         Map<String, String> uriParameters = new HashMap();
         uriParameters.put("apiKey", apiKey);
-        uriParameters.put("source", source);
+        uriParameters.put("sources", source);
         ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl + TOP_HEADLINES_ENDPOINTS, HttpMethod.GET, request, NewsResponse.class, uriParameters);
         newsResponse = response.getBody();
 
@@ -39,32 +40,32 @@ public class NewsService extends AbstractService {
     }
 
     public NewsResponse getNewsByCountry(String apiKey, String countryCode) {
-        if (apiKey.isEmpty() || apiKey == null || countryCode.isEmpty() || countryCode == null) {
+        if (StringUtils.isEmpty(apiKey) ||StringUtils.isEmpty(countryCode)) {
             throw new IllegalArgumentException();
         }
-        NewsResponse newsResponse = new NewsResponse();
+        NewsResponse newsResponse;
         HttpHeaders headers = new HttpHeaders();
         HttpEntity request = new HttpEntity(headers);
         Map<String, String> uriParameters = new HashMap();
         uriParameters.put("apiKey", apiKey);
         uriParameters.put("countryCode", countryCode);
-        ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl, HttpMethod.GET, request, NewsResponse.class, uriParameters);
+        ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl + TOP_HEADLINES_ENDPOINTS, HttpMethod.GET, request, NewsResponse.class, uriParameters);
         newsResponse = response.getBody();
 
         return newsResponse;
     }
 
     public NewsResponse getNewsByCategory(String apiKey, String category) {
-        if (apiKey.isEmpty() || apiKey == null || category.isEmpty() || category == null) {
+        if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(category)) {
             throw new IllegalArgumentException();
         }
-        NewsResponse newsResponse = new NewsResponse();
+        NewsResponse newsResponse;
         HttpHeaders headers = new HttpHeaders();
         HttpEntity request = new HttpEntity(headers);
         Map<String, String> uriParameters = new HashMap();
         uriParameters.put("apiKey", apiKey);
         uriParameters.put("category", category);
-        ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl, HttpMethod.GET, request, NewsResponse.class, uriParameters);
+        ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl + TOP_HEADLINES_ENDPOINTS, HttpMethod.GET, request, NewsResponse.class, uriParameters);
         newsResponse = response.getBody();
 
         return newsResponse;
