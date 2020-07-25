@@ -6,9 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class NewsController {
@@ -20,7 +18,7 @@ public class NewsController {
     }
 
     @GetMapping("/source{apiKey}{sources}")
-    public ResponseEntity<NewsResponse> getNewsBySource(@PathVariable("apiKey") String apiKey, @PathVariable("sources") String source) {
+    public ResponseEntity<NewsResponse> getNewsBySource(@RequestParam("apiKey") String apiKey, @RequestParam("sources") String source) {
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(source)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -33,7 +31,7 @@ public class NewsController {
     }
 
     @GetMapping("/country{apiKey}{country}")
-    public ResponseEntity<NewsResponse> getNewsByCountry(@PathVariable("apiKey") String apiKey, @PathVariable("country") String country) {
+    public ResponseEntity<NewsResponse> getNewsByCountry(@RequestParam("apiKey") String apiKey, @RequestParam("country") String country) {
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(country)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
@@ -46,7 +44,7 @@ public class NewsController {
     }
 
     @GetMapping("/category{apiKey}{category}")
-    public ResponseEntity<NewsResponse> getNewsByCategory(@PathVariable String apiKey, @PathVariable String category) {
+    public ResponseEntity<NewsResponse> getNewsByCategory(@RequestParam("apiKey") String apiKey, @RequestParam("category") String category) {
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(category)) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

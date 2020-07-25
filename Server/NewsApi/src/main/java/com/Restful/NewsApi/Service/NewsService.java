@@ -19,11 +19,11 @@ import static com.Restful.NewsAPI.Constants.*;
 public class NewsService extends AbstractService {
 
     @Autowired
-    public NewsService(RestTemplate restTemplate, @Qualifier("newsBaseUrl") String baseURL) {
-        super(restTemplate, baseURL);
+    public NewsService(RestTemplate restTemplate, @Qualifier("newsBaseUrl") String newsBaseURL) {
+        super(restTemplate, newsBaseURL);
     }
 
-    public NewsResponse getNewsBySource(String apiKey, String source) {
+    public NewsResponse getNewsBySource(String apiKey, String source) {  //TODO: service needs to be updated
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(source)) {
             throw new IllegalArgumentException();
         }
@@ -32,15 +32,15 @@ public class NewsService extends AbstractService {
         HttpEntity request = new HttpEntity(headers);
         Map<String, String> uriParameters = new HashMap();
         uriParameters.put("apiKey", apiKey);
-        uriParameters.put("sources", source);
-        ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl + TOP_HEADLINES_ENDPOINTS, HttpMethod.GET, request, NewsResponse.class, uriParameters);
+        uriParameters.put("source", source);
+        ResponseEntity<NewsResponse> response = restTemplate.exchange(newsBaseUrl + TOP_HEADLINES_ENDPOINTS, HttpMethod.GET, request, NewsResponse.class, uriParameters);
         newsResponse = response.getBody();
 
         return newsResponse;
     }
 
     public NewsResponse getNewsByCountry(String apiKey, String countryCode) {
-        if (StringUtils.isEmpty(apiKey) ||StringUtils.isEmpty(countryCode)) {
+        if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(countryCode)) {
             throw new IllegalArgumentException();
         }
         NewsResponse newsResponse;
@@ -49,7 +49,7 @@ public class NewsService extends AbstractService {
         Map<String, String> uriParameters = new HashMap();
         uriParameters.put("apiKey", apiKey);
         uriParameters.put("countryCode", countryCode);
-        ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl + TOP_HEADLINES_ENDPOINTS, HttpMethod.GET, request, NewsResponse.class, uriParameters);
+        ResponseEntity<NewsResponse> response = restTemplate.exchange(newsBaseUrl + TOP_HEADLINES_ENDPOINTS, HttpMethod.GET, request, NewsResponse.class, uriParameters);
         newsResponse = response.getBody();
 
         return newsResponse;
@@ -65,7 +65,7 @@ public class NewsService extends AbstractService {
         Map<String, String> uriParameters = new HashMap();
         uriParameters.put("apiKey", apiKey);
         uriParameters.put("category", category);
-        ResponseEntity<NewsResponse> response = restTemplate.exchange(baseUrl + TOP_HEADLINES_ENDPOINTS, HttpMethod.GET, request, NewsResponse.class, uriParameters);
+        ResponseEntity<NewsResponse> response = restTemplate.exchange(newsBaseUrl + TOP_HEADLINES_ENDPOINTS, HttpMethod.GET, request, NewsResponse.class, uriParameters);
         newsResponse = response.getBody();
 
         return newsResponse;

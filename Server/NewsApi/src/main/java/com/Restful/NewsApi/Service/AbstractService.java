@@ -4,10 +4,10 @@ import org.springframework.web.client.RestTemplate;
 
 public class AbstractService {
     protected RestTemplate restTemplate;
-    protected String baseUrl;
+    protected String newsBaseUrl;
 
-    public AbstractService(RestTemplate restTemplate, String baseUrl) {
+    public AbstractService(RestTemplate restTemplate, String newsBaseUrl) {
         this.restTemplate = restTemplate;
-        this.baseUrl = baseUrl;
+        this.newsBaseUrl = newsBaseUrl;
     }
 }
