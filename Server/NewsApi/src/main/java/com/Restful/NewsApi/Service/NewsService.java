@@ -19,7 +19,7 @@ public class NewsService extends AbstractService {
         super(restTemplate, newsBaseURL);
     }
 
-    public NewsResponse getNewsBySource(String apiKey, String source) { 
+    public NewsResponse getNewsBySource(String apiKey, String source) {
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(source)) {
             throw new IllegalArgumentException();
         }

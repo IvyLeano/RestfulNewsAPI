@@ -9,6 +9,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.HttpStatusCodeException;
 
 @RestController
 public class NewsController {
@@ -24,14 +25,15 @@ public class NewsController {
         if (StringUtils.isEmpty(apiKey)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
-        if (StringUtils.isEmpty(source)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
         try {
             NewsResponse newsResponse = newsService.getNewsBySource(apiKey, source);
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (HttpStatusCodeException e) {
+            return ResponseEntity.status(e.getStatusCode()).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -48,6 +50,10 @@ public class NewsController {
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (HttpStatusCodeException e) {
+            return ResponseEntity.status(e.getStatusCode()).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -64,6 +70,10 @@ public class NewsController {
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } catch (HttpStatusCodeException e) {
+            return ResponseEntity.status(e.getStatusCode()).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }
