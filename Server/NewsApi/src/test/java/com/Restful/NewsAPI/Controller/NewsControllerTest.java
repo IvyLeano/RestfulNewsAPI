@@ -16,119 +16,134 @@ import static org.mockito.Mockito.*;
 public class NewsControllerTest {
 
     private NewsService mockNewsService;
-    private NewsController mockNewsController;
+    private NewsController newsController;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         mockNewsService = mock(NewsService.class);
-        mockNewsController = new NewsController(mockNewsService);
+        newsController = new NewsController(mockNewsService);
     }
+
     // Tests for getNewsBySource()
     @Test
     void WhenCalling_getNewsBySource_withoutApiKey_shouldReturn_httpStatusUnauthorized() {
-        ResponseEntity<NewsResponse> responseEntity = mockNewsController.getNewsBySource("", "source");
+        ResponseEntity<NewsResponse> responseEntity = newsController.getNewsBySource("", "source");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
 
-        responseEntity = mockNewsController.getNewsBySource(null, "source");
+        responseEntity = newsController.getNewsBySource(null, "source");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
     }
+
     @Test
     void WhenCalling_getNewsBySource_andServiceThrows_illegalArgumentException_shouldReturn_httpStatusBadRequest() {
         doThrow(IllegalArgumentException.class).when(mockNewsService).getNewsBySource(any(), any());
-        ResponseEntity responseEntity = mockNewsController.getNewsBySource("apiKey", "source");
+        ResponseEntity responseEntity = newsController.getNewsBySource("apiKey", "source");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
+
     @Test
     void WhenCalling_getNewsBySource_andServiceThrows_httpStatusCodeException_shouldReturn_httpStatusCodeException() {
         HttpStatusCodeException httpStatusCodeException = new HttpServerErrorException(HttpStatus.BAD_GATEWAY);
         doThrow(httpStatusCodeException).when(mockNewsService).getNewsBySource(any(), any());
-        ResponseEntity responseEntity = mockNewsController.getNewsBySource("apiKey", "source");
+        ResponseEntity responseEntity = newsController.getNewsBySource("apiKey", "source");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_GATEWAY);
     }
+
     @Test
     void WhenCalling_getNewsBySource_andServiceThrows_genericException_shouldReturn_genericException() {
         RuntimeException runtimeException = new RuntimeException();
         doThrow(runtimeException).when(mockNewsService).getNewsBySource(any(), any());
-        ResponseEntity responseEntity = mockNewsController.getNewsBySource("apiKey", "source");
+        ResponseEntity responseEntity = newsController.getNewsBySource("apiKey", "source");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
     @Test
     void WhenCalling_getNewsBySource_andServiceIsSuccessful_shouldReturn_httpStatusOk() {
         NewsResponse newsResponse = new NewsResponse();
-        when(mockNewsService.getNewsBySource(any(),any())).thenReturn(newsResponse);
-        ResponseEntity responseEntity = mockNewsController.getNewsBySource("apiKey", "source");
+        when(mockNewsService.getNewsBySource(any(), any())).thenReturn(newsResponse);
+        ResponseEntity responseEntity = newsController.getNewsBySource("apiKey", "source");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
+
     // Tests for getNewsByCountry()
     @Test
     void WhenCalling_getNewsByCountry_withoutApiKey_shouldReturn_httpStatusUnauthorized() {
-        ResponseEntity<NewsResponse> responseEntity = mockNewsController.getNewsByCountry("", "country");
+        ResponseEntity<NewsResponse> responseEntity = newsController.getNewsByCountry("", "country");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
 
-        responseEntity = mockNewsController.getNewsByCountry(null, "country");
+        responseEntity = newsController.getNewsByCountry(null, "country");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
     }
+
     @Test
     void WhenCalling_getNewsByCountry_andServiceThrows_illegalArgumentException_shouldReturn_httpStatusBadRequest() {
         doThrow(IllegalArgumentException.class).when(mockNewsService).getNewsByCountry(any(), any());
-        ResponseEntity responseEntity = mockNewsController.getNewsByCountry("apiKey", "country");
+        ResponseEntity responseEntity = newsController.getNewsByCountry("apiKey", "country");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
+
     @Test
     void WhenCalling_getNewsByCountry_andServiceThrows_httpStatusCodeException_shouldReturn_httpStatusCodeException() {
         HttpStatusCodeException httpStatusCodeException = new HttpServerErrorException(HttpStatus.BAD_GATEWAY);
         doThrow(httpStatusCodeException).when(mockNewsService).getNewsByCountry(any(), any());
-        ResponseEntity responseEntity = mockNewsController.getNewsByCountry("apiKey", "country");
+        ResponseEntity responseEntity = newsController.getNewsByCountry("apiKey", "country");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_GATEWAY);
     }
+
     @Test
     void WhenCalling_getNewsByCountry_andServiceThrows_genericException_shouldReturn_genericException() {
         RuntimeException runtimeException = new RuntimeException();
         doThrow(runtimeException).when(mockNewsService).getNewsByCountry(any(), any());
-        ResponseEntity responseEntity = mockNewsController.getNewsByCountry("apiKey", "country");
+        ResponseEntity responseEntity = newsController.getNewsByCountry("apiKey", "country");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
     @Test
     void WhenCalling_getNewsByCountry_andServiceIsSuccessful_shouldReturn_httpStatusOk() {
         NewsResponse newsResponse = new NewsResponse();
-        when(mockNewsService.getNewsByCountry(any(),any())).thenReturn(newsResponse);
-        ResponseEntity responseEntity = mockNewsController.getNewsByCountry("apiKey", "country");
+        when(mockNewsService.getNewsByCountry(any(), any())).thenReturn(newsResponse);
+        ResponseEntity responseEntity = newsController.getNewsByCountry("apiKey", "country");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
+
     // Tests for getNewsByCategory()
     @Test
     void WhenCalling_getNewsByCategory_withoutApiKey_shouldReturn_httpStatusUnauthorized() {
-        ResponseEntity<NewsResponse> responseEntity = mockNewsController.getNewsByCategory("", "category");
+        ResponseEntity<NewsResponse> responseEntity = newsController.getNewsByCategory("", "category");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
 
-        responseEntity = mockNewsController.getNewsByCategory(null, "category");
+        responseEntity = newsController.getNewsByCategory(null, "category");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
     }
+
     @Test
     void WhenCalling_getNewsByCategory_andServiceThrows_illegalArgumentException_shouldReturn_httpStatusBadRequest() {
         doThrow(IllegalArgumentException.class).when(mockNewsService).getNewsByCategory(any(), any());
-        ResponseEntity responseEntity = mockNewsController.getNewsByCategory("apiKey", "category");
+        ResponseEntity responseEntity = newsController.getNewsByCategory("apiKey", "category");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
+
     @Test
     void WhenCalling_getNewsByCategory_andServiceThrows_httpStatusCodeException_shouldReturn_httpStatusCodeException() {
         HttpStatusCodeException httpStatusCodeException = new HttpServerErrorException(HttpStatus.BAD_GATEWAY);
         doThrow(httpStatusCodeException).when(mockNewsService).getNewsByCategory(any(), any());
-        ResponseEntity responseEntity = mockNewsController.getNewsByCategory("apiKey", "category");
+        ResponseEntity responseEntity = newsController.getNewsByCategory("apiKey", "category");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_GATEWAY);
     }
+
     @Test
     void WhenCalling_getNewsByCategory_andServiceThrows_genericException_shouldReturn_genericException() {
         RuntimeException runtimeException = new RuntimeException();
         doThrow(runtimeException).when(mockNewsService).getNewsByCategory(any(), any());
-        ResponseEntity responseEntity = mockNewsController.getNewsByCategory("apiKey", "category");
+        ResponseEntity responseEntity = newsController.getNewsByCategory("apiKey", "category");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
     @Test
     void WhenCalling_getNewsByCategory_andServiceIsSuccessful_shouldReturn_httpStatusOk() {
         NewsResponse newsResponse = new NewsResponse();
-        when(mockNewsService.getNewsByCategory(any(),any())).thenReturn(newsResponse);
-        ResponseEntity responseEntity = mockNewsController.getNewsByCategory("apiKey", "category");
+        when(mockNewsService.getNewsByCategory(any(), any())).thenReturn(newsResponse);
+        ResponseEntity responseEntity = newsController.getNewsByCategory("apiKey", "category");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }
