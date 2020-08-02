@@ -28,7 +28,7 @@ public class NewsService extends AbstractService {
         HttpEntity<?> requestEntity = new HttpEntity<>(requestHeaders);
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(newsBaseUrl + TOP_HEADLINES_ENDPOINTS)
                 .queryParam("apiKey", apiKey)
-                .queryParam("sources", source);
+                .queryParam("Sources", source);
         ResponseEntity<NewsResponse> responseEntity = restTemplate.exchange(
                 uriBuilder.toUriString(),
                 HttpMethod.GET,

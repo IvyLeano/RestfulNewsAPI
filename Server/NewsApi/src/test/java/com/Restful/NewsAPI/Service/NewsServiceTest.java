@@ -67,7 +67,7 @@ public class NewsServiceTest {
     void WhenCalling_getNewsBySource_withCorrectParameters_shouldUseCorrectUrl() {
         when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
         newsService.getNewsBySource("apiKey", "source");
-        verify(mockRestTemplate).exchange(eq("https://baseurl.com/v2/top-headlines?apiKey=apiKey&sources=source"), any(), any(), any(Class.class));
+        verify(mockRestTemplate).exchange(eq("https://baseurl.com/v2/top-headlines?apiKey=apiKey&Sources=source"), any(), any(), any(Class.class));
     }
 
     @Test
@@ -226,5 +226,95 @@ public class NewsServiceTest {
         assertThat(newsResponseReturned.getArticles()[0].getContent().equals("The Gilmor family at a fundraiser in Boston."));
     }
 
+    // Tests for getNewsByCategory()
+    @Test
+    void WhenCalling_getNewsByCategory_withoutApiKey_shouldThrow_illegalArgumentException() {
+        assertThatThrownBy(() -> {
+            newsService.getNewsByCategory("", "category");
+        }).isInstanceOfAny(IllegalArgumentException.class);
+        assertThatThrownBy(() -> {
+            newsService.getNewsByCategory(null, "category");
+        }).isInstanceOfAny(IllegalArgumentException.class);
+    }
 
+    @Test
+    void WhenCalling_getNewsByCategory_withoutSource_shouldThrow_illegalArgumentException() {
+        assertThatThrownBy(() -> {
+            newsService.getNewsByCategory("apiKey", "");
+        }).isInstanceOfAny(IllegalArgumentException.class);
+        assertThatThrownBy(() -> {
+            newsService.getNewsByCategory("apiKey", null);
+        }).isInstanceOfAny(IllegalArgumentException.class);
+    }
+
+    @Test
+    void WhenCalling_getNewsByCategory_withCorrectParameters_shouldUseCorrectUrl() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        newsService.getNewsByCategory("apiKey", "category");
+        verify(mockRestTemplate).exchange(eq("https://baseurl.com/v2/top-headlines?apiKey=apiKey&Category=category"), any(), any(), any(Class.class));
+    }
+
+    @Test
+    void WhenCalling_getNewsByCategory_shouldUseCorrectHttpMethod() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        newsService.getNewsByCategory("apiKey", "category");
+        verify(mockRestTemplate).exchange(anyString(), eq(HttpMethod.GET), any(), any(Class.class));
+    }
+
+    @Test
+    void WhenCalling_getNewsByCategory_andMethodReturnsValidResponse_shouldReturnCorrectSource() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsByCategory("apiKey", "category");
+        assertThat(newsResponseReturned.getArticles()[0].getSource().getId().equals("techcrunch"));
+        assertThat(newsResponseReturned.getArticles()[0].getSource().getName().equals("TechCrunch"));
+    }
+
+    @Test
+    void WhenCalling_getNewsByCategory_andMethodReturnsValidResponse_shouldReturnCorrectAuthor() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsByCategory("apiKey", "category");
+        assertThat(newsResponseReturned.getArticles()[0].getAuthor().equals("Sally Gillmor"));
+    }
+
+    @Test
+    void WhenCalling_getNewsByCategory_andMethodReturnsValidResponse_shouldReturnCorrectTitle() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsByCategory("apiKey", "category");
+        assertThat(newsResponseReturned.getArticles()[0].getTitle().equals("Gillmor Family"));
+    }
+
+    @Test
+    void WhenCalling_getNewsByCategory_andMethodReturnsValidResponse_shouldReturnCorrectDescription() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsByCategory("apiKey", "category");
+        assertThat(newsResponseReturned.getArticles()[0].getDescription().equals("The Gillmor family, 3 weeks ago"));
+    }
+
+    @Test
+    void WhenCalling_getNewsByCategory_andMethodReturnsValidResponse_shouldReturnCorrectUrl() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsByCategory("apiKey", "category");
+        assertThat(newsResponseReturned.getArticles()[0].getUrl().equals("https://techcrunch.com"));
+    }
+
+    @Test
+    void WhenCalling_getNewsByCategory_andMethodReturnsValidResponse_shouldReturnCorrectUrlToImage() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsByCategory("apiKey", "category");
+        assertThat(newsResponseReturned.getArticles()[0].getUrlToImage().equals("https://techcrunchimage.com"));
+    }
+
+    @Test
+    void WhenCalling_getNewsByCategory_andMethodReturnsValidResponse_shouldReturnCorrectPublishedAt() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsByCategory("apiKey", "category");
+        assertThat(newsResponseReturned.getArticles()[0].getPublishedAt().equals("2020-08-01"));
+    }
+
+    @Test
+    void WhenCalling_getNewsByCategory_andMethodReturnsValidResponse_shouldReturnCorrectContent() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsByCategory("apiKey", "category");
+        assertThat(newsResponseReturned.getArticles()[0].getContent().equals("The Gilmor family at a fundraiser in Boston."));
+    }
 }
