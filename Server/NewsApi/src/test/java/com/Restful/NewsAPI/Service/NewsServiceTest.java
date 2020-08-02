@@ -5,15 +5,18 @@ import com.Restful.NewsAPI.Model.NewsResponse;
 import com.Restful.NewsAPI.Model.Source;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.Mockito.*;
 
 public class NewsServiceTest {
     private final static String BASE_URL = "https://baseurl.com";
-    private NewsService newsService;
     private RestTemplate mockRestTemplate;
+    private NewsService newsService;
     private NewsResponse newsResponse;
 
     @BeforeEach
@@ -21,114 +24,116 @@ public class NewsServiceTest {
         mockRestTemplate = mock(RestTemplate.class);
         newsService = new NewsService(mockRestTemplate, BASE_URL);
 
-        Source source1 = new Source();
-        source1.setId("techcrunch");
-        source1.setName("TechCrunch");
+        Source source = new Source();
+        source.setId("techcrunch");
+        source.setName("TechCrunch");
 
-        Source source2 = new Source();
-        source2.setId("techcrunch2");
-        source2.setName("TechCrunch2");
-
-        Article article1 = new Article();
-        article1.setSource(source1);
-        article1.setAuthor("Sally Gillmor");
-        article1.setTitle("Gillmor Family");
-        article1.setDescription("The Gillmor family, 3 weeks ago");
-        article1.setUrl("https://techcrunch.com");
-        article1.setUrlToImage("https://techcrunchimage.com");
-        article1.setPublishedAt("2020-08-01");
-        article1.setContent("The Gilmor family at a fundraiser in Boston.");
-
-        Article article2 = new Article();
-        article2.setSource(source2);
-        article2.setAuthor("Tim Smith");
-        article2.setTitle("Smith Family");
-        article2.setDescription("The Smith family, 3 weeks ago");
-        article2.setUrl("https://techcrunch2.com");
-        article2.setUrlToImage("https://techcrunchimage2.com");
-        article2.setPublishedAt("2020-08-02");
-        article2.setContent("The Smith family at a fundraiser in Boston.");
+        Article article = new Article();
+        article.setSource(source);
+        article.setAuthor("Sally Gillmor");
+        article.setTitle("Gillmor Family");
+        article.setDescription("The Gillmor family, 3 weeks ago");
+        article.setUrl("https://techcrunch.com");
+        article.setUrlToImage("https://techcrunchimage.com");
+        article.setPublishedAt("2020-08-01");
+        article.setContent("The Gilmor family at a fundraiser in Boston.");
 
         newsResponse = new NewsResponse();
-        newsResponse.setArticles(new Article[] { article1, article2 });
+        newsResponse.setArticles(new Article[]{article});
     }
 
     // Tests for getNewsBySource()
     @Test
     void WhenCalling_getNewsBySource_withoutApiKey_shouldThrow_illegalArgumentException() {
         assertThatThrownBy(() -> {
-            newsService.getNewsBySource("","source");
+            newsService.getNewsBySource("", "source");
         }).isInstanceOfAny(IllegalArgumentException.class);
         assertThatThrownBy(() -> {
-            newsService.getNewsBySource(null,"source");
+            newsService.getNewsBySource(null, "source");
         }).isInstanceOfAny(IllegalArgumentException.class);
     }
 
     @Test
     void WhenCalling_getNewsBySource_withoutSource_shouldThrow_illegalArgumentException() {
         assertThatThrownBy(() -> {
-            newsService.getNewsBySource("apiKey","");
+            newsService.getNewsBySource("apiKey", "");
         }).isInstanceOfAny(IllegalArgumentException.class);
         assertThatThrownBy(() -> {
-            newsService.getNewsBySource("apiKey",null);
+            newsService.getNewsBySource("apiKey", null);
         }).isInstanceOfAny(IllegalArgumentException.class);
     }
 
     @Test
-    void WhenCalling_getNewsBySource_withCorrectParameters_shouldSetCorrectUriParameters() {
-
-    }
-
-    @Test
-    void WhenCalling_getNewsBySource_shouldUseCorrectUrl() {
-
+    void WhenCalling_getNewsBySource_withCorrectParameters_shouldUseCorrectUrl() {
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        newsService.getNewsBySource("apiKey", "source");
+        verify(mockRestTemplate).exchange(eq("https://baseurl.com/v2/top-headlines?apiKey=apiKey&sources=source"), any(), any(), any(Class.class));
     }
 
     @Test
     void WhenCalling_getNewsBySource_shouldUseCorrectHttpMethod() {
-
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        newsService.getNewsBySource("apiKey", "source");
+        verify(mockRestTemplate).exchange(anyString(), eq(HttpMethod.GET), any(), any(Class.class));
     }
 
     @Test
     void WhenCalling_getNewsBySource_andMethodReturnsValidResponse_shouldReturnCorrectSource() {
-
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsBySource("apiKey", "source");
+        assertThat(newsResponseReturned.getArticles()[0].getSource().getId().equals("techcrunch"));
+        assertThat(newsResponseReturned.getArticles()[0].getSource().getName().equals("TechCrunch"));
     }
 
     @Test
     void WhenCalling_getNewsBySource_andMethodReturnsValidResponse_shouldReturnCorrectAuthor() {
-
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsBySource("apiKey", "source");
+        assertThat(newsResponseReturned.getArticles()[0].getAuthor().equals("Sally Gillmor"));
     }
 
     @Test
     void WhenCalling_getNewsBySource_andMethodReturnsValidResponse_shouldReturnCorrectTitle() {
-
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsBySource("apiKey", "source");
+        assertThat(newsResponseReturned.getArticles()[0].getTitle().equals("Gillmor Family"));
     }
 
     @Test
     void WhenCalling_getNewsBySource_andMethodReturnsValidResponse_shouldReturnCorrectDescription() {
-
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsBySource("apiKey", "source");
+        assertThat(newsResponseReturned.getArticles()[0].getDescription().equals("The Gillmor family, 3 weeks ago"));
     }
 
     @Test
     void WhenCalling_getNewsBySource_andMethodReturnsValidResponse_shouldReturnCorrectUrl() {
-
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsBySource("apiKey", "source");
+        assertThat(newsResponseReturned.getArticles()[0].getUrl().equals("https://techcrunch.com"));
     }
 
     @Test
     void WhenCalling_getNewsBySource_andMethodReturnsValidResponse_shouldReturnCorrectUrlToImage() {
-
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsBySource("apiKey", "source");
+        assertThat(newsResponseReturned.getArticles()[0].getUrlToImage().equals("https://techcrunchimage.com"));
     }
 
     @Test
     void WhenCalling_getNewsBySource_andMethodReturnsValidResponse_shouldReturnCorrectPublishedAt() {
-
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsBySource("apiKey", "source");
+        assertThat(newsResponseReturned.getArticles()[0].getPublishedAt().equals("2020-08-01"));
     }
 
     @Test
     void WhenCalling_getNewsBySource_andMethodReturnsValidResponse_shouldReturnCorrectContent() {
-
+        when(mockRestTemplate.exchange(anyString(), any(), any(), any(Class.class))).thenReturn(ResponseEntity.ok(newsResponse));
+        NewsResponse newsResponseReturned = newsService.getNewsBySource("apiKey", "source");
+        assertThat(newsResponseReturned.getArticles()[0].getContent().equals("The Gilmor family at a fundraiser in Boston."));
     }
 
-   // TODO: add tests for category and country!
+    // TODO: add tests for category and country!
     // TODO: D.O?
 }
