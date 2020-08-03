@@ -1,6 +1,7 @@
 # RestfulNewsAPI
 ## Server
-- The backend was created using Spring Boot. You can learn more about Spring Boot here: https://spring.io/projects/spring-boot
+- Created using Spring Boot, you can learn more about Spring Boot here: https://spring.io/projects/spring-boot
+- Deployed using Digital Ocean
 
 ### API: 
 - baseUrl: https://newsapi.org/v2/top-headlines
