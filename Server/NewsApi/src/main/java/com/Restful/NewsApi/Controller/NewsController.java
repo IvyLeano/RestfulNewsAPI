@@ -20,33 +20,13 @@ public class NewsController {
         this.newsService = newsService;
     }
 
-    @GetMapping("/source{apiKey}{sources}")
-    public ResponseEntity<NewsResponse> getNewsBySource(@RequestParam("apiKey") String apiKey, @RequestParam("sources") String source) {
+    @GetMapping("/source{apiKey}{source}")
+    public ResponseEntity<NewsResponse> getNewsBySource(@RequestParam("apiKey") String apiKey, @RequestParam("source") String source) {
         if (StringUtils.isEmpty(apiKey)) {
             return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
         }
         try {
             NewsResponse newsResponse = newsService.getNewsBySource(apiKey, source);
-            return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        } catch (HttpStatusCodeException e) {
-            return ResponseEntity.status(e.getStatusCode()).build();
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
-    }
-
-    @GetMapping("/country{apiKey}{country}")
-    public ResponseEntity<NewsResponse> getNewsByCountry(@RequestParam("apiKey") String apiKey, @RequestParam("country") String country) {
-        if (StringUtils.isEmpty(apiKey)) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-        if (StringUtils.isEmpty(country)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        try {
-            NewsResponse newsResponse = newsService.getNewsByCountry(apiKey, country);
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();

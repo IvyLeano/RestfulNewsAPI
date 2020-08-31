@@ -1,5 +1,6 @@
 package com.Restful.NewsAPI.Service;
 
+import com.Restful.NewsAPI.CountryCodeEnum;
 import com.Restful.NewsAPI.Model.NewsResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,25 +39,6 @@ public class NewsService extends AbstractService {
         return responseEntity.getBody();
     }
 
-    public NewsResponse getNewsByCountry(String apiKey, String countryCode) {
-        if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(countryCode)) {
-            throw new IllegalArgumentException();
-        }
-        HttpHeaders requestHeaders = new HttpHeaders();
-        requestHeaders.add("Accept", MediaType.APPLICATION_JSON_VALUE);
-        HttpEntity<?> requestEntity = new HttpEntity<>(requestHeaders);
-        UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(newsBaseUrl + TOP_HEADLINES_ENDPOINTS)
-                .queryParam("apiKey", apiKey)
-                .queryParam("Country", countryCode);
-        ResponseEntity<NewsResponse> responseEntity = restTemplate.exchange(
-                uriBuilder.toUriString(),
-                HttpMethod.GET,
-                requestEntity,
-                NewsResponse.class
-        );
-        return responseEntity.getBody();
-    }
-
     public NewsResponse getNewsByCategory(String apiKey, String category) {
         if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(category)) {
             throw new IllegalArgumentException();
@@ -67,6 +49,9 @@ public class NewsService extends AbstractService {
         UriComponentsBuilder uriBuilder = UriComponentsBuilder.fromHttpUrl(newsBaseUrl + TOP_HEADLINES_ENDPOINTS)
                 .queryParam("apiKey", apiKey)
                 .queryParam("Category", category);
+        for (CountryCodeEnum countryCode : CountryCodeEnum.values()) {
+            uriBuilder.queryParam("Country", countryCode);
+        }
         ResponseEntity<NewsResponse> responseEntity = restTemplate.exchange(
                 uriBuilder.toUriString(),
                 HttpMethod.GET,
