@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Screens/home_page.dart';
+import 'Screens/home_page_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePage(title: 'Top News Headlines'),
+      home: HomePageScreen(title: 'Top News Headlines'),
     );
   }
 }

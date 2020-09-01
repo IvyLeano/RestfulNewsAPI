@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key key, this.title}) : super(key: key);
+class HomePageScreen extends StatelessWidget {
+  const HomePageScreen({Key key, this.title}) : super(key: key);
 
   final String title;
 
