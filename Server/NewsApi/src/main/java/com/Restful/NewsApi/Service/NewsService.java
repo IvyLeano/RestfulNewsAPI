@@ -16,12 +16,12 @@ import static com.Restful.NewsAPI.Constants.TOP_HEADLINES_ENDPOINTS;
 public class NewsService extends AbstractService {
 
     @Autowired
-    public NewsService(RestTemplate restTemplate, @Qualifier("newsBaseUrl") String newsBaseURL) {
-        super(restTemplate, newsBaseURL);
+    public NewsService(RestTemplate restTemplate, @Qualifier("newsBaseUrl") String newsBaseURL, @Qualifier("apiKey") String apiKey) {
+        super(restTemplate, newsBaseURL, apiKey);
     }
 
-    public NewsResponse getNewsBySource(String apiKey, String source) {
-        if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(source)) {
+    public NewsResponse getNewsBySource(String source) {
+        if (StringUtils.isEmpty(source)) {
             throw new IllegalArgumentException();
         }
         HttpHeaders requestHeaders = new HttpHeaders();
@@ -39,8 +39,8 @@ public class NewsService extends AbstractService {
         return responseEntity.getBody();
     }
 
-    public NewsResponse getNewsByCategory(String apiKey, String category) {
-        if (StringUtils.isEmpty(apiKey) || StringUtils.isEmpty(category)) {
+    public NewsResponse getNewsByCategory(String category) {
+        if (StringUtils.isEmpty(category)) {
             throw new IllegalArgumentException();
         }
         HttpHeaders requestHeaders = new HttpHeaders();

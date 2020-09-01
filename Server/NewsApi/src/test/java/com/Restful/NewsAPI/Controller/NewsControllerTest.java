@@ -26,83 +26,65 @@ public class NewsControllerTest {
 
     // Tests for getNewsBySource()
     @Test
-    void WhenCalling_getNewsBySource_withoutApiKey_shouldReturn_httpStatusUnauthorized() {
-        ResponseEntity<NewsResponse> responseEntity = newsController.getNewsBySource("", "source");
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
-
-        responseEntity = newsController.getNewsBySource(null, "source");
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
-    }
-
-    @Test
     void WhenCalling_getNewsBySource_andServiceThrows_illegalArgumentException_shouldReturn_httpStatusBadRequest() {
-        doThrow(IllegalArgumentException.class).when(mockNewsService).getNewsBySource(any(), any());
-        ResponseEntity responseEntity = newsController.getNewsBySource("apiKey", "source");
+        doThrow(IllegalArgumentException.class).when(mockNewsService).getNewsBySource(any());
+        ResponseEntity responseEntity = newsController.getNewsBySource("source");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test
     void WhenCalling_getNewsBySource_andServiceThrows_httpStatusCodeException_shouldReturn_httpStatusCodeException() {
         HttpStatusCodeException httpStatusCodeException = new HttpServerErrorException(HttpStatus.BAD_GATEWAY);
-        doThrow(httpStatusCodeException).when(mockNewsService).getNewsBySource(any(), any());
-        ResponseEntity responseEntity = newsController.getNewsBySource("apiKey", "source");
+        doThrow(httpStatusCodeException).when(mockNewsService).getNewsBySource(any());
+        ResponseEntity responseEntity = newsController.getNewsBySource("source");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_GATEWAY);
     }
 
     @Test
     void WhenCalling_getNewsBySource_andServiceThrows_genericException_shouldReturn_genericException() {
         RuntimeException runtimeException = new RuntimeException();
-        doThrow(runtimeException).when(mockNewsService).getNewsBySource(any(), any());
-        ResponseEntity responseEntity = newsController.getNewsBySource("apiKey", "source");
+        doThrow(runtimeException).when(mockNewsService).getNewsBySource(any());
+        ResponseEntity responseEntity = newsController.getNewsBySource("source");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Test
     void WhenCalling_getNewsBySource_andServiceIsSuccessful_shouldReturn_httpStatusOk() {
         NewsResponse newsResponse = new NewsResponse();
-        when(mockNewsService.getNewsBySource(any(), any())).thenReturn(newsResponse);
-        ResponseEntity responseEntity = newsController.getNewsBySource("apiKey", "source");
+        when(mockNewsService.getNewsBySource(any())).thenReturn(newsResponse);
+        ResponseEntity responseEntity = newsController.getNewsBySource("source");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 
     // Tests for getNewsByCategory()
     @Test
-    void WhenCalling_getNewsByCategory_withoutApiKey_shouldReturn_httpStatusUnauthorized() {
-        ResponseEntity<NewsResponse> responseEntity = newsController.getNewsByCategory("", "category");
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
-
-        responseEntity = newsController.getNewsByCategory(null, "category");
-        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.UNAUTHORIZED);
-    }
-
-    @Test
     void WhenCalling_getNewsByCategory_andServiceThrows_illegalArgumentException_shouldReturn_httpStatusBadRequest() {
-        doThrow(IllegalArgumentException.class).when(mockNewsService).getNewsByCategory(any(), any());
-        ResponseEntity responseEntity = newsController.getNewsByCategory("apiKey", "category");
+        doThrow(IllegalArgumentException.class).when(mockNewsService).getNewsByCategory(any());
+        ResponseEntity responseEntity = newsController.getNewsByCategory("category");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
     }
 
     @Test
     void WhenCalling_getNewsByCategory_andServiceThrows_httpStatusCodeException_shouldReturn_httpStatusCodeException() {
         HttpStatusCodeException httpStatusCodeException = new HttpServerErrorException(HttpStatus.BAD_GATEWAY);
-        doThrow(httpStatusCodeException).when(mockNewsService).getNewsByCategory(any(), any());
-        ResponseEntity responseEntity = newsController.getNewsByCategory("apiKey", "category");
+        doThrow(httpStatusCodeException).when(mockNewsService).getNewsByCategory(any());
+        ResponseEntity responseEntity = newsController.getNewsByCategory("category");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.BAD_GATEWAY);
     }
 
     @Test
     void WhenCalling_getNewsByCategory_andServiceThrows_genericException_shouldReturn_genericException() {
         RuntimeException runtimeException = new RuntimeException();
-        doThrow(runtimeException).when(mockNewsService).getNewsByCategory(any(), any());
-        ResponseEntity responseEntity = newsController.getNewsByCategory("apiKey", "category");
+        doThrow(runtimeException).when(mockNewsService).getNewsByCategory(any());
+        ResponseEntity responseEntity = newsController.getNewsByCategory("category");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @Test
     void WhenCalling_getNewsByCategory_andServiceIsSuccessful_shouldReturn_httpStatusOk() {
         NewsResponse newsResponse = new NewsResponse();
-        when(mockNewsService.getNewsByCategory(any(), any())).thenReturn(newsResponse);
-        ResponseEntity responseEntity = newsController.getNewsByCategory("apiKey", "category");
+        when(mockNewsService.getNewsByCategory(any())).thenReturn(newsResponse);
+        ResponseEntity responseEntity = newsController.getNewsByCategory("category");
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
     }
 }

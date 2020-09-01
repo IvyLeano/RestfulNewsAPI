@@ -10,10 +10,18 @@ public class AppConfig {
 
     @Value("${baseurl.property}")
     private String newsBaseUrl;
-    
-    @Bean(name="newsBaseUrl")
+
+    @Value("${apikey.property}")
+    private String apiKey;
+
+    @Bean(name = "newsBaseUrl")
     public String getNewsBaseUrl() {
         return newsBaseUrl;
+    }
+
+    @Bean(name = "apiKey")
+    public String getApiKey() {
+        return apiKey;
     }
 
     @Bean

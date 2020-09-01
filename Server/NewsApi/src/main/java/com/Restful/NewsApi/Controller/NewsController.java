@@ -5,7 +5,6 @@ import com.Restful.NewsAPI.Service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,13 +19,10 @@ public class NewsController {
         this.newsService = newsService;
     }
 
-    @GetMapping("/source{apiKey}{source}")
-    public ResponseEntity<NewsResponse> getNewsBySource(@RequestParam("apiKey") String apiKey, @RequestParam("source") String source) {
-        if (StringUtils.isEmpty(apiKey)) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
+    @GetMapping("/source{source}")
+    public ResponseEntity<NewsResponse> getNewsBySource(@RequestParam("source") String source) {
         try {
-            NewsResponse newsResponse = newsService.getNewsBySource(apiKey, source);
+            NewsResponse newsResponse = newsService.getNewsBySource(source);
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -37,16 +33,10 @@ public class NewsController {
         }
     }
 
-    @GetMapping("/category{apiKey}{category}")
-    public ResponseEntity<NewsResponse> getNewsByCategory(@RequestParam("apiKey") String apiKey, @RequestParam("category") String category) {
-        if (StringUtils.isEmpty(apiKey)) {
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
-        }
-        if (StringUtils.isEmpty(category)) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
+    @GetMapping("/category{category}")
+    public ResponseEntity<NewsResponse> getNewsByCategory(@RequestParam("category") String category) {
         try {
-            NewsResponse newsResponse = newsService.getNewsByCategory(apiKey, category);
+            NewsResponse newsResponse = newsService.getNewsByCategory(category);
             return ResponseEntity.status(HttpStatus.OK).body(newsResponse);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
