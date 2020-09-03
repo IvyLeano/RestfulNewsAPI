@@ -1,4 +1,3 @@
-
 class SourceModel {
   final String id;
   final String name;
@@ -11,5 +10,4 @@ class SourceModel {
       name: json['name'] as String,
     );
   }
-
 }

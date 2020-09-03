@@ -10,11 +10,11 @@ class HeaderComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
-        child: Text(
-      heading,
-      style: TextStyle(
-          fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
-    ),
+      child: Text(
+        heading,
+        style: TextStyle(
+            fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green),
+      ),
     );
   }
 }

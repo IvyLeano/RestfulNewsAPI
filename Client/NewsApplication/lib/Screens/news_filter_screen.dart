@@ -1,24 +1,43 @@
-
-import 'package:NewsApplication/Screens/Components/news_filter_tile_component.dart';
-import 'package:NewsApplication/utils/source_enum.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+import 'Components/Articles/news_article_rows_component.dart';
+import 'Components/header_component.dart';
 
 class NewsFilterScreen extends StatelessWidget {
-  NewsFilterScreen({Key key, this.filters}) : super(key: key);
+  NewsFilterScreen({Key key, this.filter}) : super(key: key);
 
-  final List<String> filters;
-
-  Widget getFilterTiles() {
-    List<Widget> filterRows = new List<Widget>();
-
-    for(String filter in filters){
-      filterRows.add(new NewsFilterTileComponent(title: filter));
-    }
-    return new Column(children: filterRows);
-  }
+  final String filter;
 
   @override
   Widget build(BuildContext context) {
-    return getFilterTiles();  // TODO: on-click events
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Text("TopNewsHeadlines",
+            style: TextStyle(
+                fontSize: 25)), // TODO: add size style to central file
+      ),
+      body: SingleChildScrollView(
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height,
+          ),
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(
+                MediaQuery.of(context).size.width * 0.075,
+                7,
+                MediaQuery.of(context).size.width * 0.075,
+                7),
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  HeaderComponent(heading: filter),
+                  NewsArticleRowsComponent(filter: filter),
+                ]),
+          ),
+        ),
+      ),
+    );
   }
 }

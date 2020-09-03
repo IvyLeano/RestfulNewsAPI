@@ -1,4 +1,3 @@
-
 import 'package:NewsApplication/Models/article_model.dart';
 
 class NewsResponseModel {

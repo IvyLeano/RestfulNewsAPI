@@ -6,7 +6,8 @@ import 'package:http/http.dart' as http;
 
 class NewsResponseService {
   Future<NewsResponseModel> fetchNewsBySource(String source) async {
-    final Uri endpoint = new Uri.http(Constants.BASE_URL, Constants.NEWS_BY_SOURCE_ENDPOINT, {"source" : source});
+    final Uri endpoint = new Uri.http(Constants.BASE_URL,
+        Constants.NEWS_BY_SOURCE_ENDPOINT, {"source": source});
     final response = await http.get(endpoint);
 
     if (response.statusCode == 200) {
@@ -17,7 +18,8 @@ class NewsResponseService {
   }
 
   Future<NewsResponseModel> fetchNewsByCategory(String category) async {
-    final Uri endpoint = new Uri.http(Constants.BASE_URL, Constants.NEWS_BY_CATEGORY_ENDPOINT, {"category" : category});
+    final Uri endpoint = new Uri.http(Constants.BASE_URL,
+        Constants.NEWS_BY_CATEGORY_ENDPOINT, {"category": category});
     final response = await http.get(endpoint);
 
     if (response.statusCode == 200) {
