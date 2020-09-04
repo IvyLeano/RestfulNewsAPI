@@ -1,8 +1,11 @@
+import 'package:NewsApplication/Controllers/news_response_controller.dart';
+import 'package:NewsApplication/Models/news_response_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Components/Articles/news_article_rows_component.dart';
 import 'Components/header_component.dart';
+import 'package:NewsApplication/utils/constants.dart';
 
 class NewsFilterScreen extends StatelessWidget {
   NewsFilterScreen({Key key, this.filter}) : super(key: key);
