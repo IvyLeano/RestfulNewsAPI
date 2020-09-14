@@ -1,6 +1,6 @@
 class Constants {
   static const String BASE_URL =
-      "4e010cd8c78a.ngrok.io"; // TODO: update the base url, exclude "http://"
+      "f97818224b69.ngrok.io"; // TODO: update the base url, exclude "http://"
   static const String NEWS_BY_CATEGORY_ENDPOINT = "/category";
   static const String NEWS_BY_SOURCE_ENDPOINT = "/source";
 

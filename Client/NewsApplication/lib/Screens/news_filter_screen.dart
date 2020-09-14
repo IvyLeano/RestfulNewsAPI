@@ -1,16 +1,15 @@
-import 'package:NewsApplication/Controllers/news_response_controller.dart';
-import 'package:NewsApplication/Models/news_response_model.dart';
+import 'package:NewsApplication/Models/article_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Components/Articles/news_article_rows_component.dart';
 import 'Components/header_component.dart';
-import 'package:NewsApplication/utils/constants.dart';
 
 class NewsFilterScreen extends StatelessWidget {
-  NewsFilterScreen({Key key, this.filter}) : super(key: key);
+  NewsFilterScreen({Key key, this.header, this.articles}) : super(key: key);
 
-  final String filter;
+  final String header;
+  final List<ArticleModel> articles;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +34,8 @@ class NewsFilterScreen extends StatelessWidget {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  HeaderComponent(heading: filter),
-                  NewsArticleRowsComponent(filter: filter),
+                  HeaderComponent(heading: header),
+                  NewsArticleRowsComponent(articles: articles),
                 ]),
           ),
         ),

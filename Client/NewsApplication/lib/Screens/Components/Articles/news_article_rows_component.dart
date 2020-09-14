@@ -1,33 +1,25 @@
-import 'package:NewsApplication/Controllers/news_response_controller.dart';
 import 'package:NewsApplication/Models/article_model.dart';
-import 'package:NewsApplication/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 
 import 'news_article_row_component.dart';
 
 class NewsArticleRowsComponent extends StatelessWidget {
-  NewsArticleRowsComponent({Key key, this.filter}) : super(key: key);
+  const NewsArticleRowsComponent({Key key, this.filter, this.articles})
+      : super(key: key);
 
   final String filter;
+  final List<ArticleModel> articles;
 
-  Widget applyFilter(List<ArticleModel> articles) {
+  Widget applyFilter() {
     List<Widget> filterRows = new List<Widget>();
-    articles.forEach((item) {
+    this.articles.forEach((item) {
       filterRows.add(new NewsArticleRowComponent(article: item));
     });
     return new Column(children: filterRows);
   }
 
-  List<ArticleModel> getFilteredNews() {
-    NewsResponseController newsController = new NewsResponseController();
-    return Constants.sources.containsKey(filter)
-        ? newsController.getNewsBySource()
-        : newsController.getNewsByCategory();
-  }
-
   @override
   Widget build(BuildContext context) {
-    List<ArticleModel> news = getFilteredNews();
-    return applyFilter(news);
+    return applyFilter();
   }
 }

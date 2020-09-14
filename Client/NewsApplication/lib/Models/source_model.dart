@@ -6,8 +6,8 @@ class SourceModel {
 
   factory SourceModel.fromJson(Map<String, dynamic> json) {
     return SourceModel(
-      id: json['id'] as String,
-      name: json['name'] as String,
+      id: json['id'],
+      name: json['name'],
     );
   }
 }

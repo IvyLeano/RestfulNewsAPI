@@ -3,18 +3,31 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'news_caption_component.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class NewsArticleRowComponent extends StatelessWidget {
   NewsArticleRowComponent({Key key, this.article}) : super(key: key);
 
   final ArticleModel article;
 
+  Future<void> _launchInBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(
+        url,
+        forceSafariVC: false,
+        forceWebView: false,
+      );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => {
-        print("tap article")
-        // navigate to url
+        _launchInBrowser(article.url),
       },
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

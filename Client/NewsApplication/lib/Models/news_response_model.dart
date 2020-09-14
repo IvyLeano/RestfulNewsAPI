@@ -6,8 +6,10 @@ class NewsResponseModel {
   NewsResponseModel({this.articles});
 
   factory NewsResponseModel.fromJson(Map<String, dynamic> json) {
-    return NewsResponseModel(
-      articles: json['articles'] as List<ArticleModel>,
-    );
+    List<ArticleModel> articles = new List();
+    for (Map<String, dynamic> article in json['articles']) {
+      articles.add(ArticleModel.fromJson(article));
+    }
+    return NewsResponseModel(articles: articles);
   }
 }
