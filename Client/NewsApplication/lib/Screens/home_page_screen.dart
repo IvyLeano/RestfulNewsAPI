@@ -1,5 +1,6 @@
 import 'package:NewsApplication/Screens/Components/Filters/filter_rows_component.dart';
 import 'package:NewsApplication/Screens/Components/header_component.dart';
+import 'package:NewsApplication/utils/constants.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,9 +31,9 @@ class HomePageScreen extends StatelessWidget {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  HeaderComponent(heading: "News By Source"),
+                  HeaderComponent(heading: Constants.SOURCE_HEADER),
                   FilterRowsComponent(filter: "sources"),
-                  HeaderComponent(heading: "News By Category"),
+                  HeaderComponent(heading: Constants.CATEGORY_HEADER),
                   FilterRowsComponent(filter: "categories"),
                 ]),
           ),

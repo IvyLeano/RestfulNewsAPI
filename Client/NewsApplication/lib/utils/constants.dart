@@ -4,6 +4,12 @@ class Constants {
   static const String NEWS_BY_CATEGORY_ENDPOINT = "/category";
   static const String NEWS_BY_SOURCE_ENDPOINT = "/source";
 
+  // TITLES, HEADERS AND DESCRIPTIONS
+  static const String APP_BAR_TITLE = "TopNewsHeadlines";
+  static const String SOURCE_HEADER = "News By Source";
+  static const String CATEGORY_HEADER = "News By Category";
+  static const String ANONYMOUS_AUTHOR = "Anonymous Author\n";
+
   // NEWS SEARCH - FILTER OPTIONS
   static const Map<String, String> sources = {
     "CNN": "CNN",
@@ -22,6 +28,4 @@ class Constants {
     "Sports": "SPORTS",
     "Technology": "TECHNOLOGY"
   };
-
-  // THEMES
 }

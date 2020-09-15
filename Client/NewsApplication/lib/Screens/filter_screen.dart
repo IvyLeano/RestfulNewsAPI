@@ -1,4 +1,5 @@
 import 'package:NewsApplication/Models/article_model.dart';
+import 'package:NewsApplication/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class FilterScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("TopNewsHeadlines", style: TextStyle(fontSize: 25)),
+        title: Text(Constants.APP_BAR_TITLE, style: TextStyle(fontSize: 25)),
       ),
       body: SingleChildScrollView(
         child: ConstrainedBox(

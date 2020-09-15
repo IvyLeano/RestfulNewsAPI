@@ -1,3 +1,4 @@
+import 'package:NewsApplication/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'Screens/home_page_screen.dart';
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.green,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: HomePageScreen(title: 'TopNewsHeadlines'),
+      home: HomePageScreen(title: Constants.APP_BAR_TITLE),
     );
   }
 }

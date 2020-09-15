@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 class FilterRowComponent extends StatelessWidget {
   FilterRowComponent({Key key, this.title}) : super(key: key);
 
-  NewsResponseController newsController = new NewsResponseController();
-  List<ArticleModel> articles = new List<ArticleModel>();
+  final String title;
+  final NewsResponseController newsController = new NewsResponseController();
 
   Future loadNews() async {
     if (Constants.sources.containsKey(title)) {
@@ -20,13 +20,13 @@ class FilterRowComponent extends StatelessWidget {
     }
   }
 
-  final String title;
   @override
   Widget build(BuildContext context) {
+    List<ArticleModel> articles = new List<ArticleModel>();
     return InkWell(
       onTap: () => {
         loadNews().whenComplete(() => {
-              this.articles = newsController.articles,
+              articles = newsController.articles,
               Navigator.push(
                 context,
                 MaterialPageRoute(
