@@ -8,7 +8,9 @@ class Constants {
   static const String APP_BAR_TITLE = "TopNewsHeadlines";
   static const String SOURCE_HEADER = "News By Source";
   static const String CATEGORY_HEADER = "News By Category";
-  static const String ANONYMOUS_AUTHOR = "Anonymous Author\n";
+  static const String UNAVAILABLE_AUTHOR = "Author Unavailable\n";
+  static const String UNAVAILABLE_DATE = "Date Unavailable\n\n";
+  static const String UNAVAILABLE_DESCRIPTION = "Description Unavailable";
 
   // NEWS SEARCH - FILTER OPTIONS
   static const Map<String, String> sources = {

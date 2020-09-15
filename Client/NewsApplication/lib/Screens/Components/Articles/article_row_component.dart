@@ -28,9 +28,9 @@ class ArticleRowComponent extends StatelessWidget {
     bool isValidAuthor =
         article.author != null && !article.author.contains("</a");
     String author =
-        !isValidAuthor ? Constants.ANONYMOUS_AUTHOR : article.author + "\n";
-    String date = article.publishedAt.substring(0, 10) + "\n\n";
-    String description = article.description;
+        !isValidAuthor ? Constants.UNAVAILABLE_AUTHOR : article.author + "\n";
+    String date = article.publishedAt == null ? Constants.UNAVAILABLE_DATE : article.publishedAt.substring(0, 10) + "\n\n";
+    String description = article.description == null ? Constants.UNAVAILABLE_DESCRIPTION : article.description;
 
     return InkWell(
       onTap: () => {
