@@ -2,11 +2,11 @@ import 'package:NewsApplication/Models/article_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'Components/Articles/news_article_rows_component.dart';
+import 'Components/Articles/article_rows_component.dart';
 import 'Components/header_component.dart';
 
-class NewsFilterScreen extends StatelessWidget {
-  NewsFilterScreen({Key key, this.header, this.articles}) : super(key: key);
+class FilterScreen extends StatelessWidget {
+  FilterScreen({Key key, this.header, this.articles}) : super(key: key);
 
   final String header;
   final List<ArticleModel> articles;
@@ -16,9 +16,7 @@ class NewsFilterScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text("TopNewsHeadlines",
-            style: TextStyle(
-                fontSize: 25)), // TODO: add size style to central file
+        title: Text("TopNewsHeadlines", style: TextStyle(fontSize: 25)),
       ),
       body: SingleChildScrollView(
         child: ConstrainedBox(
@@ -35,7 +33,7 @@ class NewsFilterScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   HeaderComponent(heading: header),
-                  NewsArticleRowsComponent(articles: articles),
+                  ArticleRowsComponent(articles: articles),
                 ]),
           ),
         ),

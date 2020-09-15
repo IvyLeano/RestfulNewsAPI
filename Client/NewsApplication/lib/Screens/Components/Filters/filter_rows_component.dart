@@ -2,10 +2,10 @@ import 'package:NewsApplication/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'news_filter_row_component.dart';
+import 'filter_row_component.dart';
 
-class NewsFilterRowsComponent extends StatelessWidget {
-  NewsFilterRowsComponent({Key key, this.filter}) : super(key: key);
+class FilterRowsComponent extends StatelessWidget {
+  FilterRowsComponent({Key key, this.filter}) : super(key: key);
 
   final String filter;
 
@@ -14,14 +14,13 @@ class NewsFilterRowsComponent extends StatelessWidget {
 
     if (filter == "sources") {
       Constants.sources.forEach((key, value) {
-        filterRows.add(new NewsFilterRowComponent(title: key));
+        filterRows.add(new FilterRowComponent(title: key));
       });
     } else {
       Constants.categories.forEach((key, value) {
-        filterRows.add(new NewsFilterRowComponent(title: key));
+        filterRows.add(new FilterRowComponent(title: key));
       });
     }
-
     return new Column(children: filterRows);
   }
 

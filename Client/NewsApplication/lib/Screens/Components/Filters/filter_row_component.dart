@@ -1,12 +1,13 @@
 import 'package:NewsApplication/Controllers/news_response_controller.dart';
 import 'package:NewsApplication/Models/article_model.dart';
-import 'package:NewsApplication/Screens/news_filter_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:NewsApplication/Screens/filter_screen.dart';
 import 'package:NewsApplication/utils/constants.dart';
 
-class NewsFilterRowComponent extends StatelessWidget {
-  NewsFilterRowComponent({Key key, this.title}) : super(key: key);
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+class FilterRowComponent extends StatelessWidget {
+  FilterRowComponent({Key key, this.title}) : super(key: key);
 
   NewsResponseController newsController = new NewsResponseController();
   List<ArticleModel> articles = new List<ArticleModel>();
@@ -30,7 +31,7 @@ class NewsFilterRowComponent extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) =>
-                      NewsFilterScreen(header: title, articles: articles),
+                      FilterScreen(header: title, articles: articles),
                 ),
               ),
             })

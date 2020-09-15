@@ -8,9 +8,7 @@ class NewsResponseController {
   List<ArticleModel> articles = new List<ArticleModel>();
 
   Future<bool> getNewsBySource(String value) async {
-    //TODO: determine if passing through an enum is proper dart syntax
     String parameter = Constants.sources[value];
-    print(parameter);
     try {
       NewsResponseModel news =
           await newsResponseService.fetchNewsBySource(parameter);
@@ -23,9 +21,7 @@ class NewsResponseController {
   }
 
   Future<bool> getNewsByCategory(String value) async {
-    //TODO: determine if passing through an enum is proper dart syntax
     String parameter = Constants.categories[value];
-    print(parameter);
     try {
       NewsResponseModel news =
           await newsResponseService.fetchNewsByCategory(parameter);

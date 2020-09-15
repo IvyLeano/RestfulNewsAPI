@@ -1,9 +1,10 @@
 class Constants {
-  static const String BASE_URL =
-      "f97818224b69.ngrok.io"; // TODO: update the base url, exclude "http://"
+  // ENDPOINTS
+  static const String BASE_URL = "76dbc3c03da7.ngrok.io";
   static const String NEWS_BY_CATEGORY_ENDPOINT = "/category";
   static const String NEWS_BY_SOURCE_ENDPOINT = "/source";
 
+  // NEWS SEARCH - FILTER OPTIONS
   static const Map<String, String> sources = {
     "CNN": "CNN",
     "CBC": "CBC-NEWS",
@@ -20,5 +21,7 @@ class Constants {
     "Science": "SCIENCE",
     "Sports": "SPORTS",
     "Technology": "TECHNOLOGY"
-  }; // TODO: update naming style to follow dart guidelines
+  };
+
+  // THEMES
 }
