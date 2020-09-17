@@ -7,7 +7,7 @@ import 'Components/Articles/article_rows_component.dart';
 import 'Components/header_component.dart';
 
 class FilterScreen extends StatelessWidget {
-  FilterScreen({Key key, this.header, this.articles}) : super(key: key);
+  const FilterScreen({Key key, this.header, this.articles}) : super(key: key);
 
   final String header;
   final List<ArticleModel> articles;

@@ -1,6 +1,6 @@
 class SourceModel {
-  final String id;
-  final String name;
+  String id;
+  String name;
 
   SourceModel({this.id, this.name});
 

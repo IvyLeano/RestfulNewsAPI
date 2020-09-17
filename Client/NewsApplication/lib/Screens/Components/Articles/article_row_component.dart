@@ -8,7 +8,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ArticleRowComponent extends StatelessWidget {
-  ArticleRowComponent({Key key, this.article}) : super(key: key);
+ const ArticleRowComponent({Key key, this.article}) : super(key: key);
 
   final ArticleModel article;
   Future<void> _launchInBrowser(String url) async {
@@ -32,7 +32,7 @@ class ArticleRowComponent extends StatelessWidget {
     String date = article.publishedAt == null ? Constants.UNAVAILABLE_DATE : article.publishedAt.substring(0, 10) + "\n\n";
     String description = article.description == null ? Constants.UNAVAILABLE_DESCRIPTION : article.description;
 
-    return InkWell(
+    return InkWell(  // TODO: add a spinner to deal with image lags
       onTap: () => {
         _launchInBrowser(article.url),
       },

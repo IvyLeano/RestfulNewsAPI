@@ -1,7 +1,7 @@
 import 'package:NewsApplication/Models/article_model.dart';
 
 class NewsResponseModel {
-  final List<ArticleModel> articles;
+  List<ArticleModel> articles;
 
   NewsResponseModel({this.articles});
 

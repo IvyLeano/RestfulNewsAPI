@@ -1,14 +1,14 @@
 import 'package:NewsApplication/Models/source_model.dart';
 
 class ArticleModel {
-  final SourceModel source;
-  final String author;
-  final String title;
-  final String description;
-  final String url;
-  final String urlToImage;
-  final String publishedAt;
-  final String content;
+  SourceModel source;
+  String author;
+  String title;
+  String description;
+  String url;
+  String urlToImage;
+  String publishedAt;
+  String content;
 
   ArticleModel(
       {this.source,
