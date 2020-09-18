@@ -9,12 +9,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:http/http.dart' as http;
 
-class MockNewsResponseService extends Mock implements NewsResponseService {}
+class MockHttpResponse extends Mock implements http.Response {}
+
 class MockClient extends Mock implements http.Client {}
 
+class MockService extends Mock implements NewsResponseService {}
+
 void main() {
-  MockNewsResponseService mockNewsResponseService = new MockNewsResponseService();
-  NewsResponseController newsResponseController = NewsResponseController(newsResponseService: mockNewsResponseService);
+  MockService newsResponseService = new MockService();
+  NewsResponseController newsResponseController = NewsResponseController(
+      newsResponseService: newsResponseService, client: new MockClient());
   NewsResponseModel newsResponseModel = new NewsResponseModel();
   List<ArticleModel> articles = new List<ArticleModel>();
   SourceModel sourceModel1 = new SourceModel();
@@ -45,18 +49,17 @@ void main() {
     expect(() => newsResponseController.getNewsBySource(""), throwsException);
   });
 
-  test('When calling getNewsBySource() if source is valid, should return true',
-      () async {
-    expect(await newsResponseController.getNewsBySource("CNN"), true);
-  });
-
-  // TODO: test happy path test
   test(
-      'When calling getNewsBySource() if source is valid, should set correct articles',
+      'When calling getNewsBySource() and request is successful, should set controller articles',
       () async {
-      when(mockNewsResponseService.fetchNewsBySource(new http.Client(), "CNN")).thenAnswer((_) async => newsResponseModel);
-      await newsResponseController.getNewsBySource("source");
-      verify(newsResponseController.articles[0].source.id == "CNN");
+    when(newsResponseService.fetchNewsBySource(
+            newsResponseController.client, any))
+        .thenAnswer((_) async => newsResponseModel);
+    await newsResponseController.getNewsBySource("CNN");
+    assert(newsResponseController.articles[0].source.id == "CNN");
+    assert(newsResponseController.articles[0].source.name == "cnn");
+    assert(newsResponseController.articles[1].source.id == "CBC");
+    assert(newsResponseController.articles[1].source.name == "cbc");
   });
 
   // Tests for fetchNewsByCategory()
@@ -69,8 +72,15 @@ void main() {
   });
 
   test(
-      'When calling getNewsByCategory() if category is valid, should return true',
+      'When calling getNewsByCategory() and request is successful, should set controller articles',
       () async {
-    expect(await newsResponseController.getNewsByCategory("Business"), true);
+    when(newsResponseService.fetchNewsByCategory(
+            newsResponseController.client, any))
+        .thenAnswer((_) async => newsResponseModel);
+    await newsResponseController.getNewsByCategory("Business");
+    assert(newsResponseController.articles[0].source.id == "CNN");
+    assert(newsResponseController.articles[0].source.name == "cnn");
+    assert(newsResponseController.articles[1].source.id == "CBC");
+    assert(newsResponseController.articles[1].source.name == "cbc");
   });
 }
