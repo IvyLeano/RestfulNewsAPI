@@ -23,11 +23,11 @@ class Constants {
   };
 
   static const Map<String, String> categories = {
-    "Business": "BUSINESS",
-    "Entertainment": "ENTERTAINMENT",
-    "Politics": "POLITICS",
-    "Science": "SCIENCE",
-    "Sports": "SPORTS",
-    "Technology": "TECHNOLOGY"
+    "Business": "business",
+    "Entertainment": "entertainment",
+    "Politics": "politics",
+    "Science": "science",
+    "Sports": "sports",
+    "Technology": "technology"
   };
 }
