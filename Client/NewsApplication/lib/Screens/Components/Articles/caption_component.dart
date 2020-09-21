@@ -19,20 +19,34 @@ class CaptionComponent extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black),
       ),
-      child: Center(
-        child: Padding(
-          padding: EdgeInsets.all(5),
-          child: Column(children: <Widget>[
-            Text(
-              author + date + caption,
-              textAlign: TextAlign.justify,
-              style: TextStyle(
-                fontSize: 15,
-                color: Colors.black,
-              ),
+      child: Padding(
+        padding: EdgeInsets.all(5),
+        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+          Text(
+            author,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.black,
             ),
-          ]),
-        ),
+          ),
+          Text(
+            date + "\n",
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            caption,
+            textAlign: TextAlign.left,
+            style: TextStyle(
+              fontSize: 15,
+              color: Colors.black,
+            ),
+          ),
+        ]),
       ),
     );
   }

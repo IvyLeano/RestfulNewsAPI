@@ -26,13 +26,13 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
   void initState() {
     isValidAuthor =
         widget.article.author != null && !widget.article.author.contains("</a");
-    author = !isValidAuthor
+    author = !isValidAuthor || widget.article.author == ""
         ? Constants.UNAVAILABLE_AUTHOR
-        : widget.article.author + "\n";
-    date = widget.article.publishedAt == null
+        : widget.article.author;
+    date = widget.article.publishedAt == null || widget.article.publishedAt == ""
         ? Constants.UNAVAILABLE_DATE
-        : widget.article.publishedAt.substring(0, 10) + "\n\n";
-    description = widget.article.description == null
+        : widget.article.publishedAt.substring(0, 10);
+    description = widget.article.description == null || widget.article.description == ""
         ? Constants.UNAVAILABLE_DESCRIPTION
         : widget.article.description;
   }
@@ -51,7 +51,6 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
 
   @override
   Widget build(BuildContext context) {
-    var image = Image.network(widget.article.urlToImage);
     return InkWell(
       // TODO: add a spinner to deal with image lags
       onTap: () => {
@@ -61,9 +60,9 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             TitleComponent(title: widget.article.title),
-            widget.article.urlToImage == null
-                ? Image.asset('assets/images/ImageUnavailable.jpg')
-                : Image(image: CachedNetworkImageProvider(widget.article.urlToImage)),  // TODO: resolve image error != null here
+        widget.article.urlToImage == null
+            ? Image.asset('assets/images/ImageUnavailable.jpg')
+            : Image(image: CachedNetworkImageProvider(widget.article.urlToImage)),
             CaptionComponent(caption: description, author: author, date: date),
           ]),
     );

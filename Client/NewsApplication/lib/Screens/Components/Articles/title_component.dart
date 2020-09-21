@@ -21,7 +21,7 @@ class TitleComponent extends StatelessWidget {
           padding: EdgeInsets.all(5),
           child: Text(
             title,
-            textAlign: TextAlign.justify,
+            textAlign: TextAlign.left,
             style: TextStyle(
               fontSize: 17,
               color: Colors.black,
