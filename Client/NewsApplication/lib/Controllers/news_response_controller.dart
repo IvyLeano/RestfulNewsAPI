@@ -9,7 +9,7 @@ class NewsResponseController {
   final http.Client client;
   List<ArticleModel> articles = new List<ArticleModel>();
 
-  NewsResponseController({this.newsResponseService, this.client}); // TODO: remove constructor? (used for testing purposes only)
+  NewsResponseController({this.newsResponseService, this.client});
 
   Future<bool> getNewsBySource(String value) async {
     if (value == null || value.isEmpty) {

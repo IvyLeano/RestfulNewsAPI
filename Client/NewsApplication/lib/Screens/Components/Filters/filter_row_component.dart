@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:NewsApplication/Controllers/news_response_controller.dart';
 import 'package:NewsApplication/Models/article_model.dart';
+import 'package:NewsApplication/Screens/Components/loading_spinner_dialog.dart';
 import 'package:NewsApplication/Screens/filter_screen.dart';
 import 'package:NewsApplication/Services/news_response_service.dart';
 import 'package:NewsApplication/utils/constants.dart';
@@ -8,11 +11,14 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class FilterRowComponent extends StatelessWidget {  // TODO: complete testing for components
+class FilterRowComponent extends StatelessWidget {
   FilterRowComponent({Key key, this.title}) : super(key: key);
 
   final String title;
-  final NewsResponseController newsController = new NewsResponseController(newsResponseService: new NewsResponseService(), client: new http.Client());
+
+  final NewsResponseController newsController = new NewsResponseController(
+      newsResponseService: new NewsResponseService(),
+      client: new http.Client());
 
   Future loadNews() async {
     if (Constants.sources.containsKey(title)) {
@@ -27,16 +33,17 @@ class FilterRowComponent extends StatelessWidget {  // TODO: complete testing fo
     List<ArticleModel> articles = new List<ArticleModel>();
     return InkWell(
       onTap: () => {
+        loadingSpinnerDialog(context),
         loadNews().whenComplete(() => {
               articles = newsController.articles,
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      FilterScreen(header: title, articles: articles),
+                  builder: (context) => FilterScreen(
+                      isLoading: true, header: title, articles: articles),
                 ),
               ),
-            })
+        }),
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 2.0),

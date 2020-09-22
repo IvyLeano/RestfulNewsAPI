@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:NewsApplication/Models/article_model.dart';
+import 'package:NewsApplication/Screens/Components/loading_spinner_dialog.dart';
 import 'package:NewsApplication/utils/constants.dart';
 import 'caption_component.dart';
 import 'title_component.dart';
@@ -20,6 +23,7 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
   String author;
   String date;
   String description;
+  Image image;
 
   @protected
   @mustCallSuper
@@ -29,12 +33,14 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
     author = !isValidAuthor || widget.article.author == ""
         ? Constants.UNAVAILABLE_AUTHOR
         : widget.article.author;
-    date = widget.article.publishedAt == null || widget.article.publishedAt == ""
-        ? Constants.UNAVAILABLE_DATE
-        : widget.article.publishedAt.substring(0, 10);
-    description = widget.article.description == null || widget.article.description == ""
-        ? Constants.UNAVAILABLE_DESCRIPTION
-        : widget.article.description;
+    date =
+        widget.article.publishedAt == null || widget.article.publishedAt == ""
+            ? Constants.UNAVAILABLE_DATE
+            : widget.article.publishedAt.substring(0, 10);
+    description =
+        widget.article.description == null || widget.article.description == ""
+            ? Constants.UNAVAILABLE_DESCRIPTION
+            : widget.article.description;
   }
 
   Future<void> _launchInBrowser(String url) async {
@@ -52,7 +58,6 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      // TODO: add a spinner to deal with image lags
       onTap: () => {
         _launchInBrowser(widget.article.url),
       },
@@ -60,9 +65,11 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             TitleComponent(title: widget.article.title),
-        widget.article.urlToImage == null
-            ? Image.asset('assets/images/ImageUnavailable.jpg')
-            : Image(image: CachedNetworkImageProvider(widget.article.urlToImage)),
+            widget.article.urlToImage == null
+                ? Image.asset('assets/images/ImageUnavailable.jpg')
+                : Image(
+                    image:
+                        CachedNetworkImageProvider(widget.article.urlToImage)),
             CaptionComponent(caption: description, author: author, date: date),
           ]),
     );

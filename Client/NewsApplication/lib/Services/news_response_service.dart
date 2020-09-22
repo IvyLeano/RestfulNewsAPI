@@ -8,6 +8,7 @@ class NewsResponseService {
   Future<NewsResponseModel> fetchNewsBySource(http.Client client, String source) async {
     final Uri endpoint = new Uri.http(Constants.BASE_URL,
         Constants.NEWS_BY_SOURCE_ENDPOINT, {"source": source});
+
     final http.Response response = await client
         .get(endpoint, headers: {'Content-Type': 'application/json'});
 
