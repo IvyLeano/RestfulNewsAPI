@@ -4,10 +4,8 @@ import 'article_row_component.dart';
 import 'package:flutter/cupertino.dart';
 
 class ArticleRowsComponent extends StatelessWidget {
-  ArticleRowsComponent({Key key, this.filter, this.articles})
-      : super(key: key);
+  ArticleRowsComponent({Key key, this.articles}) : super(key: key);
 
-  final String filter;
   final List<ArticleModel> articles;
 
   Widget applyNewsFilter() {

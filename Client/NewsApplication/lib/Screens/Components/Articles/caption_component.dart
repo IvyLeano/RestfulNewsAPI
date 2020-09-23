@@ -15,7 +15,6 @@ class CaptionComponent extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: 2.0),
       margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
       width: MediaQuery.of(context).size.width * 0.85,
-      //height: 35,
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black),
       ),

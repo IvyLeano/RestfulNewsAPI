@@ -5,7 +5,8 @@ import 'package:NewsApplication/utils/constants.dart';
 import 'package:http/http.dart' as http;
 
 class NewsResponseService {
-  Future<NewsResponseModel> fetchNewsBySource(http.Client client, String source) async {
+  Future<NewsResponseModel> fetchNewsBySource(
+      http.Client client, String source) async {
     final Uri endpoint = new Uri.http(Constants.BASE_URL,
         Constants.NEWS_BY_SOURCE_ENDPOINT, {"source": source});
 
@@ -22,7 +23,8 @@ class NewsResponseService {
     }
   }
 
-  Future<NewsResponseModel> fetchNewsByCategory(http.Client client, String category) async {
+  Future<NewsResponseModel> fetchNewsByCategory(
+      http.Client client, String category) async {
     final Uri endpoint = new Uri.http(Constants.BASE_URL,
         Constants.NEWS_BY_CATEGORY_ENDPOINT, {"category": category});
     final http.Response response = await client

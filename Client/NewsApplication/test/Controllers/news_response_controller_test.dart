@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:NewsApplication/Controllers/news_response_controller.dart';
 import 'package:NewsApplication/Models/article_model.dart';
 import 'package:NewsApplication/Models/news_response_model.dart';

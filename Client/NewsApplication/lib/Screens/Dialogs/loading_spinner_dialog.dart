@@ -6,9 +6,6 @@ loadingSpinnerDialog(BuildContext context) {
       barrierDismissible: false,
       context: context,
       builder: (context) {
-        Future.delayed(Duration(seconds: 5), () {
-          Navigator.pop(context);
-        });
         return Dialog(
             elevation: 0,
             insetPadding: EdgeInsets.all(10),
@@ -20,6 +17,9 @@ loadingSpinnerDialog(BuildContext context) {
                     height: 25,
                     child: CircularProgressIndicator(
                       strokeWidth: 5,
-                    ))));
+                    )
+                )
+            )
+        );
       });
 }

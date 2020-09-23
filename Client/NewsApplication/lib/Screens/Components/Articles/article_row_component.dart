@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:NewsApplication/Models/article_model.dart';
-import 'package:NewsApplication/Screens/Components/loading_spinner_dialog.dart';
 import 'package:NewsApplication/utils/constants.dart';
 import 'caption_component.dart';
 import 'title_component.dart';
@@ -15,6 +14,7 @@ class ArticleRowComponent extends StatefulWidget {
   const ArticleRowComponent({Key key, this.article}) : super(key: key);
 
   final ArticleModel article;
+
   _ArticleRowComponentState createState() => _ArticleRowComponentState();
 }
 
@@ -26,8 +26,8 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
   Image image;
 
   @protected
-  @mustCallSuper
   void initState() {
+    super.initState();
     isValidAuthor =
         widget.article.author != null && !widget.article.author.contains("</a");
     author = !isValidAuthor || widget.article.author == ""

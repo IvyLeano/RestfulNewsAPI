@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:NewsApplication/Controllers/news_response_controller.dart';
 import 'package:NewsApplication/Models/article_model.dart';
-import 'package:NewsApplication/Screens/Components/loading_spinner_dialog.dart';
+import 'file:///C:/Users/Ivy/Desktop/PersonalProjects/RestfulNewsAPI/Client/NewsApplication/lib/Screens/Dialogs/loading_spinner_dialog.dart';
 import 'package:NewsApplication/Screens/filter_screen.dart';
 import 'package:NewsApplication/Services/news_response_service.dart';
 import 'package:NewsApplication/utils/constants.dart';
@@ -15,12 +15,11 @@ class FilterRowComponent extends StatelessWidget {
   FilterRowComponent({Key key, this.title}) : super(key: key);
 
   final String title;
-
   final NewsResponseController newsController = new NewsResponseController(
       newsResponseService: new NewsResponseService(),
       client: new http.Client());
 
-  Future loadNews() async {
+  Future<void> loadNews() async {
     if (Constants.sources.containsKey(title)) {
       await newsController.getNewsBySource(title);
     } else {
@@ -36,14 +35,15 @@ class FilterRowComponent extends StatelessWidget {
         loadingSpinnerDialog(context),
         loadNews().whenComplete(() => {
               articles = newsController.articles,
+              Navigator.pop(context),
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => FilterScreen(
-                      isLoading: true, header: title, articles: articles),
+                  builder: (context) =>
+                      FilterScreen(header: title, articles: articles),
                 ),
               ),
-        }),
+            }),
       },
       child: Container(
         margin: EdgeInsets.symmetric(vertical: 2.0),
