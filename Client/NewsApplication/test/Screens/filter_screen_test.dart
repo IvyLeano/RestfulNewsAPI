@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-
-  testWidgets('The HeaderComponent widget is present on the FilterScreen',  //TODO: the spinner is causing this test to fail, move to initState?
+  testWidgets('The HeaderComponent widget is present on the FilterScreen',
       (WidgetTester tester) async {
     await tester.pumpWidget(new MaterialApp(
         home: new Scaffold(
             body: FilterScreen(
-                header: "header", articles: new List<ArticleModel>()))));
-    await tester.pumpAndSettle(Duration(seconds: 100));
+                header: "header",
+                articles: new List<ArticleModel>(),
+                isLoading: false))));
     expect(find.byType(HeaderComponent), findsOneWidget);
   });
 
@@ -22,7 +22,9 @@ void main() {
     await tester.pumpWidget(new MaterialApp(
         home: new Scaffold(
             body: FilterScreen(
-                header: "header", articles: new List<ArticleModel>()))));
+                header: "header",
+                articles: new List<ArticleModel>(),
+                isLoading: false))));
     expect(find.byType(ArticleRowsComponent), findsOneWidget);
   });
 }

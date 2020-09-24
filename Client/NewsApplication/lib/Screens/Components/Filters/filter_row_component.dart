@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:NewsApplication/Controllers/news_response_controller.dart';
 import 'package:NewsApplication/Models/article_model.dart';
-import 'file:///C:/Users/Ivy/Desktop/PersonalProjects/RestfulNewsAPI/Client/NewsApplication/lib/Screens/Dialogs/loading_spinner_dialog.dart';
+import 'package:NewsApplication/Screens/Dialogs/loading_spinner_dialog.dart';
 import 'package:NewsApplication/Screens/filter_screen.dart';
 import 'package:NewsApplication/Services/news_response_service.dart';
 import 'package:NewsApplication/utils/constants.dart';
@@ -39,8 +39,8 @@ class FilterRowComponent extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) =>
-                      FilterScreen(header: title, articles: articles),
+                  builder: (context) => FilterScreen(
+                      header: title, articles: articles, isLoading: true),
                 ),
               ),
             }),

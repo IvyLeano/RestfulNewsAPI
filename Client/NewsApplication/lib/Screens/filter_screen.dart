@@ -9,23 +9,36 @@ import 'Components/Articles/article_rows_component.dart';
 import 'Components/header_component.dart';
 import 'Dialogs/loading_spinner_dialog.dart';
 
-class FilterScreen extends StatelessWidget {
-  const FilterScreen({Key key, this.header, this.articles}) : super(key: key);
+class FilterScreen extends StatefulWidget {
+  const FilterScreen({Key key, this.header, this.articles, this.isLoading})
+      : super(key: key);
 
   final String header;
   final List<ArticleModel> articles;
+  final bool isLoading;
 
-  void loadingSpinner(BuildContext context) async {
-    loadingSpinnerDialog(context);
-    Future.delayed(
-      Duration(seconds: 5),
-      () => Navigator.pop(context),
-    );
+  _FilterScreenState createState() => _FilterScreenState();
+}
+
+class _FilterScreenState extends State<FilterScreen> {
+  @override
+  void initState() {
+    super.initState();
+    loadingSpinner(context);
+  }
+
+  void loadingSpinner(BuildContext context) {
+    if (widget.isLoading) {
+      loadingSpinnerDialog(context);
+      Future.delayed(
+        Duration(seconds: 3),
+        () => Navigator.pop(context),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    loadingSpinner(context);
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -45,8 +58,8 @@ class FilterScreen extends StatelessWidget {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  HeaderComponent(heading: this.header),
-                  ArticleRowsComponent(articles: this.articles),
+                  HeaderComponent(heading: widget.header),
+                  ArticleRowsComponent(articles: widget.articles),
                 ]),
           ),
         ),
