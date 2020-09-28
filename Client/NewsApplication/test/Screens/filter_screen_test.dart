@@ -13,6 +13,7 @@ void main() {
             body: FilterScreen(
                 header: "header",
                 articles: new List<ArticleModel>()))));
+    await tester.pumpAndSettle();
     expect(find.byType(HeaderComponent), findsOneWidget);
   });
 
@@ -23,6 +24,7 @@ void main() {
             body: FilterScreen(
                 header: "header",
                 articles: new List<ArticleModel>()))));
+    await tester.pumpAndSettle();
     expect(find.byType(ArticleRowsComponent), findsOneWidget);
   });
 }
