@@ -15,7 +15,7 @@ class HomePageScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(this.title, style: TextStyle(fontSize: 25)),
+        title: Text(title, style: TextStyle(fontSize: 25)),
       ),
       body: SingleChildScrollView(
         child: ConstrainedBox(

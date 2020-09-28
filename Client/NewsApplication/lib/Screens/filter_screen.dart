@@ -1,4 +1,3 @@
-import 'dart:async';
 
 import 'package:NewsApplication/Models/article_model.dart';
 import 'package:NewsApplication/utils/constants.dart';
@@ -7,35 +6,13 @@ import 'package:flutter/material.dart';
 
 import 'Components/Articles/article_rows_component.dart';
 import 'Components/header_component.dart';
-import 'Dialogs/loading_spinner_dialog.dart';
 
-class FilterScreen extends StatefulWidget {
-  const FilterScreen({Key key, this.header, this.articles, this.isLoading})
+class FilterScreen extends StatelessWidget {
+  const FilterScreen({Key key, this.header, this.articles})
       : super(key: key);
 
   final String header;
   final List<ArticleModel> articles;
-  final bool isLoading;
-
-  _FilterScreenState createState() => _FilterScreenState();
-}
-
-class _FilterScreenState extends State<FilterScreen> {
-  @override
-  void initState() {
-    super.initState();
-    loadingSpinner(context);
-  }
-
-  void loadingSpinner(BuildContext context) {
-    if (widget.isLoading) {
-      loadingSpinnerDialog(context);
-      Future.delayed(
-        Duration(seconds: 3),
-        () => Navigator.pop(context),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +35,8 @@ class _FilterScreenState extends State<FilterScreen> {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  HeaderComponent(heading: widget.header),
-                  ArticleRowsComponent(articles: widget.articles),
+                  HeaderComponent(heading: header),
+                  ArticleRowsComponent(articles: articles),
                 ]),
           ),
         ),

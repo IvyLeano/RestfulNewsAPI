@@ -12,8 +12,7 @@ void main() {
         home: new Scaffold(
             body: FilterScreen(
                 header: "header",
-                articles: new List<ArticleModel>(),
-                isLoading: false))));
+                articles: new List<ArticleModel>()))));
     expect(find.byType(HeaderComponent), findsOneWidget);
   });
 
@@ -23,8 +22,7 @@ void main() {
         home: new Scaffold(
             body: FilterScreen(
                 header: "header",
-                articles: new List<ArticleModel>(),
-                isLoading: false))));
+                articles: new List<ArticleModel>()))));
     expect(find.byType(ArticleRowsComponent), findsOneWidget);
   });
 }

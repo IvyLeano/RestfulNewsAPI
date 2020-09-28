@@ -40,7 +40,7 @@ class FilterRowComponent extends StatelessWidget {
                 context,
                 MaterialPageRoute(
                   builder: (context) => FilterScreen(
-                      header: title, articles: articles, isLoading: true),
+                      header: title, articles: articles),
                 ),
               ),
             }),

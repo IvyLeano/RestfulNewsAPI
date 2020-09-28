@@ -22,7 +22,6 @@ class NewsResponseController {
       articles.addAll(news.articles);
       return true;
     } catch (e) {
-      print("Exception: " + e);
       return false;
     }
   }
@@ -38,7 +37,6 @@ class NewsResponseController {
       articles.addAll(news.articles);
       return true;
     } catch (e) {
-      print("Exception: " + e);
       return false;
     }
   }
