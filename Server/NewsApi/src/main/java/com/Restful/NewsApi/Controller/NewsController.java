@@ -5,6 +5,7 @@ import com.Restful.NewsAPI.Service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ public class NewsController {
         this.newsService = newsService;
     }
 
+    @CrossOrigin
     @GetMapping("/source{source}")
     public ResponseEntity<NewsResponse> getNewsBySource(@RequestParam("source") String source) {
         try {
@@ -33,6 +35,7 @@ public class NewsController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("/category{category}")
     public ResponseEntity<NewsResponse> getNewsByCategory(@RequestParam("category") String category) {
         try {
