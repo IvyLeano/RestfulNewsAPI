@@ -23,7 +23,7 @@ class FilterRowComponent extends StatefulWidget {
 }
 
 class _FilterRowComponentState extends State<FilterRowComponent>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   bool isLoading;
 
   @override

@@ -17,7 +17,7 @@ class FilterScreen extends StatefulWidget {
 }
 
 class _FilterScreenState extends State<FilterScreen>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   bool isLoading;
 
   @override
@@ -41,6 +41,7 @@ class _FilterScreenState extends State<FilterScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: !isLoading,
         centerTitle: true,
         title: Text(Constants.APP_BAR_TITLE, style: TextStyle(fontSize: 25)),
       ),
