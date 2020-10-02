@@ -8,7 +8,6 @@ import 'title_component.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 
 class ArticleRowComponent extends StatefulWidget {
   const ArticleRowComponent({Key key, this.article}) : super(key: key);
@@ -64,19 +63,15 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
         hoverColor: Colors.transparent,
         child: Container(
           alignment: Alignment.center,
-          child: Column(
-              children: <Widget>[
-                TitleComponent(title: widget.article.title),
-                widget.article.urlToImage == null
-                    ? Image.asset('assets/images/ImageUnavailable.jpg', width: MediaQuery.of(context).size.width * 0.70)
-                    : Image(
-                        image: CachedNetworkImageProvider(
-                            widget.article.urlToImage),
-                        width: MediaQuery.of(context).size.width * 0.70,
-                      ),
-                CaptionComponent(
-                    caption: description, author: author, date: date),
-              ]),
+          child: Column(children: <Widget>[
+            TitleComponent(title: widget.article.title),
+            widget.article.urlToImage == null
+                ? Image.asset('assets/images/ImageUnavailable.jpg',
+                    width: MediaQuery.of(context).size.width * 0.70)
+                : Image.network(widget.article.urlToImage,
+                    width: MediaQuery.of(context).size.width * 0.70),
+            CaptionComponent(caption: description, author: author, date: date),
+          ]),
         ));
   }
 }

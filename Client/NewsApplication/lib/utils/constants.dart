@@ -11,6 +11,7 @@ class Constants {
   static const String UNAVAILABLE_AUTHOR = "Author Unavailable";
   static const String UNAVAILABLE_DATE = "Date Unavailable";
   static const String UNAVAILABLE_DESCRIPTION = "Description Unavailable";
+  static const String UNAVAILABLE_NEWS_FEED = "No News to Display";
 
   // NEWS SEARCH - FILTER OPTIONS
   static const Map<String, String> sources = {
