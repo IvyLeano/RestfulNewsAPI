@@ -13,8 +13,8 @@ class CaptionComponent extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 2.0),
-      margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 10.0),
-      width: MediaQuery.of(context).size.width * 0.85,
+      margin: EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 30.0),
+      width: MediaQuery.of(context).size.width * 0.70,
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black),
       ),
@@ -25,17 +25,13 @@ class CaptionComponent extends StatelessWidget {
             author,
             textAlign: TextAlign.left,
             style: TextStyle(
-              fontSize: 15,
-              color: Colors.black,
-            ),
+                fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
           ),
           Text(
             date + "\n",
             textAlign: TextAlign.left,
             style: TextStyle(
-              fontSize: 15,
-              color: Colors.black,
-            ),
+                fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
           ),
           Text(
             caption,

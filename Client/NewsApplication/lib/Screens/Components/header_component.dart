@@ -8,8 +8,8 @@ class HeaderComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.fromLTRB(0, 6, 0, 6),
+    return  Container(
+      padding: EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 6.0),
       child: Text(
         heading,
         style: TextStyle(

@@ -4,7 +4,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'Components/Articles/article_rows_component.dart';
-import 'Components/header_component.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class FilterScreen extends StatefulWidget {
@@ -43,33 +42,25 @@ class _FilterScreenState extends State<FilterScreen>
       appBar: AppBar(
         automaticallyImplyLeading: !isLoading,
         centerTitle: true,
-        title: Text(Constants.APP_BAR_TITLE, style: TextStyle(fontSize: 25)),
+        title: Text(Constants.APP_BAR_TITLE + " - " + widget.header,
+            style: TextStyle(fontSize: 25)
+        ),
       ),
-      body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height,
-          ),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(
-                MediaQuery.of(context).size.width * 0.075,
-                7,
-                MediaQuery.of(context).size.width * 0.075,
-                7),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  if (isLoading)
-                    SpinKitCircle(
-                      color: Colors.green,
-                      size: 30.0,
-                      controller: AnimationController(
-                          vsync: this, duration: new Duration(seconds: 1)),
-                    ),
-                  HeaderComponent(heading: widget.header),
-                  ArticleRowsComponent(articles: widget.articles),
-                ]),
-          ),
+      body: Container(
+        margin: EdgeInsets.fromLTRB(0.0, 15.0, 0.0, 0.0),
+        alignment: Alignment.center,
+        child: SingleChildScrollView(
+          child: Column(children: <Widget>[
+            if (isLoading)
+              SpinKitCircle(
+                color: Colors.green,
+                size: 30.0,
+                controller: AnimationController(
+                    vsync: this, duration: new Duration(seconds: 1)
+                ),
+              ),
+            ArticleRowsComponent(articles: widget.articles),
+          ]),
         ),
       ),
     );

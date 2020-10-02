@@ -66,8 +66,9 @@ class _FilterRowComponentState extends State<FilterRowComponent>
               setIsLoading(false),
             }),
       },
+      hoverColor: Colors.green,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 2.0),
+        margin: EdgeInsets.fromLTRB(0, 2, 0, 2),
         width: MediaQuery.of(context).size.width * 0.85,
         height: 50,
         decoration: BoxDecoration(

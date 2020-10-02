@@ -58,20 +58,25 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {
-        _launchInBrowser(widget.article.url),
-      },
-      child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TitleComponent(title: widget.article.title),
-            widget.article.urlToImage == null
-                ? Image.asset('assets/images/ImageUnavailable.jpg')
-                : Image(
-                    image:
-                        CachedNetworkImageProvider(widget.article.urlToImage)),
-            CaptionComponent(caption: description, author: author, date: date),
-          ]),
-    );
+        onTap: () => {
+              _launchInBrowser(widget.article.url),
+            },
+        hoverColor: Colors.transparent,
+        child: Container(
+          alignment: Alignment.center,
+          child: Column(
+              children: <Widget>[
+                TitleComponent(title: widget.article.title),
+                widget.article.urlToImage == null
+                    ? Image.asset('assets/images/ImageUnavailable.jpg', width: MediaQuery.of(context).size.width * 0.70)
+                    : Image(
+                        image: CachedNetworkImageProvider(
+                            widget.article.urlToImage),
+                        width: MediaQuery.of(context).size.width * 0.70,
+                      ),
+                CaptionComponent(
+                    caption: description, author: author, date: date),
+              ]),
+        ));
   }
 }
