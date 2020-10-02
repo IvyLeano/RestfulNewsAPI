@@ -8,7 +8,7 @@ class HeaderComponent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Container(
+    return Container(
       padding: EdgeInsets.fromLTRB(0.0, 6.0, 0.0, 6.0),
       child: Text(
         heading,
