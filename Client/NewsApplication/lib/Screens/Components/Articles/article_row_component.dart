@@ -67,9 +67,9 @@ class _ArticleRowComponentState extends State<ArticleRowComponent> {
             TitleComponent(title: widget.article.title),
             widget.article.urlToImage == null
                 ? Image.asset('assets/images/ImageUnavailable.jpg',
-                    width: MediaQuery.of(context).size.width * 0.70)
+                    width: MediaQuery.of(context).size.width * 0.80)
                 : Image.network(widget.article.urlToImage,
-                    width: MediaQuery.of(context).size.width * 0.70),
+                    width: MediaQuery.of(context).size.width * 0.80),
             CaptionComponent(caption: description, author: author, date: date),
           ]),
         ));

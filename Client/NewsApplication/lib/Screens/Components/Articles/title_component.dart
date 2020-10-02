@@ -11,7 +11,7 @@ class TitleComponent extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 2.0),
       margin: EdgeInsets.fromLTRB(0.0, 3.0, 0.0, 0.0),
-      width: MediaQuery.of(context).size.width * 0.70,
+      width: MediaQuery.of(context).size.width * 0.80,
       //height: 35,
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black),
