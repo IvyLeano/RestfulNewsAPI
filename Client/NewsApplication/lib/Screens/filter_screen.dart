@@ -46,7 +46,7 @@ class _FilterScreenState extends State<FilterScreen>
       appBar: AppBar(
         automaticallyImplyLeading: !isLoading,
         centerTitle: true,
-        title: Text(Constants.APP_BAR_TITLE + " - " + widget.header,
+        title: Text(widget.header + " NEWS",
             style: TextStyle(fontSize: 25)),
       ),
       body: Container(
