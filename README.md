@@ -23,6 +23,7 @@
 ### Original Resource: 
 - BaseUrl: https://newsapi.org/v2/top-headlines
 - Method: get
+- ApiKey required
 - Query parameters: sources, q, language, country, category
   - `ex) https://newsapi.org/v2/top-headlines?apiKey=qwerty&category=entertainment` 
 
