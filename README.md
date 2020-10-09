@@ -23,9 +23,7 @@
 ### Original Resource: 
 - BaseUrl: https://newsapi.org/v2/top-headlines
 - Method: get
-- Query parameters: apiKey, sources, category
-- Query value options for source: CNN, CBC-NEWS, NBC-NEWS, GOOGLE-NEWS, THE-WASHINGTON-POST, USA-TODAY
-- Query value options for category: business, entertainment, politics, science, sports, technology
+- Query parameters: sources, q, language, country, category
 `ex) https://newsapi.org/v2/top-headlines?apiKey=qwerty&category=entertainment` 
 
 ## Running the Project Locally
