@@ -18,27 +18,27 @@
 - Query key parameters: source, category 
 - Query value options for source: CNN, CBC-NEWS, NBC-NEWS, GOOGLE-NEWS, THE-WASHINGTON-POST, USA-TODAY
 - Query value options for category: business, entertainment, politics, science, sports, technology
-- `ex) https://news-api-server.herokuapp.com/source?source=CNN`
+  - `ex) https://news-api-server.herokuapp.com/source?source=CNN`
 
 ### Original Resource: 
 - BaseUrl: https://newsapi.org/v2/top-headlines
 - Method: get
 - Query parameters: sources, q, language, country, category
-`ex) https://newsapi.org/v2/top-headlines?apiKey=qwerty&category=entertainment` 
+  - `ex) https://newsapi.org/v2/top-headlines?apiKey=qwerty&category=entertainment` 
 
 ## Running the Project Locally
 - Clone the project
 
 ## Client
-- In the project folder, navigate to `cd Client/NewsApplication/`
+- In the project folder `cd Client/NewsApplication/`
 - Ensure you have flutter correctly installed, run `flutter doctor -v`
 - To see a list of available devices run `flutter devices`
 - To run the application, execute `flutter run -d <device name>` 
-- ex) `flutter run -d chrome`
+  - ex) `flutter run -d chrome`
 - Alternatively, you can run the application using Android Studio
 
 ## Server
-- In the project folder, navigate to `cd Server/NewsAPI/`
+- In the project folder `cd Server/NewsAPI/`
 - To run the application as an executable jar file, run:
   - `gradle clean`
   - `gradle build`
